@@ -196,7 +196,7 @@ public class IfSwitch {
 		System.out.println("점수 입력(0~100)>");
 		n1 = sc.nextInt();
 		System.out.print("당신의 학점은 ");
-		switch(n1/10) {
+		switch(n1/10) { //입력받은 정수/10=>몫
 		case 10: System.out.println("A입니다."); break;
 		case 9: System.out.println("B입니다"); break;
 		case 8: System.out.println("C입니다"); break;
@@ -204,12 +204,82 @@ public class IfSwitch {
 		default  :System.out.println("F입니다");
 		}
 		
+		// 반복문 사용: 카페에서 주문(손님 주문:입력)->switch문으로 처리->결과 출력
+		
+		//주문을 3번만 함(반드시 메뉴에 있는 것 3번 주문)
+		
+		System.out.println("주문을 3번만 함(반드시 메뉴에 있는 것 3가지)");
+		
+		for(int i=1;i<=3;) {
+			System.out.print("메뉴(아메리카노,카페라떼,카푸치노)중에서 주문(단,주문안함 또는 stop)");
+			String order = sc.next();
+		
+			switch(order) {
+			case "아메리카노" :
+			case "카페라떼" : 
+			case "카푸치노" : System.out.println( order +"를(을) 주문하셨습니다."); i++; break; 
+			default: System.out.println( "메뉴에 없습니다."); 
+			}
+			
+		}
+		
+		//--------------------------------------------------------
+		
+		System.out.println("주문을 3번만 함");
+		for(int i=1;i<=3;i++) {
+			System.out.print("메뉴(아메리카노,카페라떼,카푸치노)중에서 주문(단,주문안함 또는 stop)");
+			String order = sc.next();
+		
+			switch(order) {
+			case "아메리카노" : 
+			case "카페라떼" : 
+			case "카푸치노" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			default: System.out.println( "메뉴에 없습니다."); 
+			}
+		}
 		
 		
 		
+
+	
 		
+		
+		int i = 1;
+		do{
+			System.out.print("메뉴(아메리카노,카페라떼,카푸치노)중에서 주문(단,주문안함 또는 stop)");
+			String order = sc.next(); //주문안함
+			
+			if(order.equals("주문안함")) {
+				break;//가장 가까운 반복문을 빠져나감
+			}
+			
+			
+			
+			switch(order) {
+			case "아메리카노" : System.out.println( order +"를(을) 주문하셨습니다."); break;
+			case "카페라떼" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "카푸치노" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "stop" :  System.out.println("그만 주문하겠습니다."); i++; break;
+			default: System.out.println( "메뉴에 없습니다."); 
+			}
+			//
+			//[과제-1] stop을 제외한 4가지 경우는 조건문이 참, stop만 거짓
+		}while(i<=1);
+	
+		
+		System.out.println("그만 주문하겠습니다.");
+		System.out.println("do~while문 카페 주문 처리 끝");
+		
+		
+		
+		sc.close();
 	}//main()끝
 		
+	
+	
+	
+	
+	
 	
 	
 	//결과를 돌려주는 타입 + 메서드명(매개변수 선언){}

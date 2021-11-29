@@ -8,6 +8,7 @@ import java.util.Scanner;
 class OperationExample { // public 이 없으면 third 패키지 안에서만 사용 가능
 	//생성자
 	public static void main(String[] args) {//프로그램의 시작
+		
 		// 산술 연산자 +-*/
 		int iv1=10;
 		int iv2=3;
@@ -193,10 +194,17 @@ class OperationExample { // public 이 없으면 third 패키지 안에서만 �
 		int a1=10, a2=20, a3;
 		a1++; // a1=a1+1
 		++a1; // 
-		System.out.println(a1+","+a2); //수+수=더한 결과
+		System.out.println(a1+","+a2); //수+수=더한 결과여서 문자열 , 콤마를 넣어준다 
 		System.out.println(a1+", "+(++a2)); // a2=21 -> 출력
 		System.out.println(a1+", "+a2++); // 출력 -> a2=22 
 		// 단항 연산자에 ()는 가독성을 높일 뿐 우선순위를 바꿀 수 없음.
+		
+		
+		/*
+		 * ++이 단독이 아닐 때, ++ 앞에 있으면 가장 먼저 실행
+		 *                ++ 뒤에 있으면 가장 마지막에 실행
+		 */
+		
 		
 		a1=10; a2=20;
 		a3 = ++a1 + a2--;
@@ -372,7 +380,6 @@ class OperationExample { // public 이 없으면 third 패키지 안에서만 �
 		int num3 = 1000;
 		
 		System.out.println(Long.MAX_VALUE);
-		
 		
 		
 	} // 프로그램의 실행 끝
