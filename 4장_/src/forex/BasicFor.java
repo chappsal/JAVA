@@ -1,5 +1,7 @@
 package forex;
 
+import java.util.Scanner;
+
 public class BasicFor {
 
 	public static void main(String[] args) {
@@ -118,13 +120,135 @@ public class BasicFor {
 		// i=1
 		hap = 0; // 반드시 0으로 초기화
 		for(i=1;i<=10;i++) { // i=1 => 2 => 3 => 4 => 5
-			hap = hap + i; //0+1+2+3+5
+			// hap = hap + i; //0+1+2+3+5
+			hap += i; // 윗줄 이렇게 사용
 		}
 		System.out.println("[반복문 사용]1~10까지 더한 합="+hap); //55
+
+		
+		// 0~10 사이의 수 중 짝수의 합 구하기
+		
+		for(hap=0,i=0;i<=10;i+=2) { // ★반드시 0으로 초기화
+			hap+=i;
+		}
+		System.out.println("[i값 2증가]0~10 사이의 수 중 짝수의 합="+hap);
+		
+		for(hap=0,i=0;i<=10;i++) {
+			if(i%2==0) hap+=i;
+		}
+		System.out.println("[if문 사용]0~10 사이의 수 중 짝수의 합="+hap);
+		
+		for(hap=0,i=0;i<=10;i++) {
+			if(i%2==1) hap+=i;
+		}
+		System.out.println("[if문 사용]0~10 사이의 수 중 홀수의 합="+hap);
+	
+		
+		for(hap=0,i=1;i<=10;i+=2) { //초기값을 변경해 구하기
+			hap+=i;
+		}
+		System.out.println("[i값 2증가]0~10 사이의 수 중 홀수의 합="+hap);
+		
+	 
+	
+	
+		/* 1~입력받은 수까지 더한 결과 */
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("1~입력받은 정수까지 더한 결과를 구합니다. 정수 입력>");
+		int lastNum=sc.nextInt();
+		
+		
+		for(hap=0,i=1; i<=lastNum; i++) {
+			hap+=i;
+		
+		}
+		System.out.println("1~"+lastNum+"까지 더한 결과="+hap);	
+			
+			
+		
+		/* firstnum(시작값)~lastnum(끝값)까지 더한 결과 */
+		
+		
+		System.out.println("시작값(정수) 입력>");
+		int firstNum=sc.nextInt();
+		
+		System.out.println("끝값(시작값보다 크거나 같은 정수) 입력>");
+		lastNum=sc.nextInt();
+		
+		for(hap=0,firstNum=0;firstNum<=lastNum;firstNum++) {
+			hap+=firstNum;
+		}
+		//11/30 과제-1
+		System.out.println("시작값~"+lastNum+"까지 더한 결과="+hap);	
+	
+		
+		
+		
+		/* firstnum(시작값)~lastnum(끝값)까지 increNum(증가값)씩 증가한 수를 더한 결과 */
+
+		
+		System.out.println("시작값(정수) 입력>"); 
+		firstNum=sc.nextInt();
+		
+		System.out.println("끝값(시작값보다 크거나 같은 정수) 입력>");
+		lastNum=sc.nextInt();
+		
+		System.out.println("증가값(양수) 입력>");
+		int increNum = sc.nextInt();
+		
+		for(hap=0;firstNum<=lastNum;firstNum+=increNum) {
+			hap+=firstNum;
+		}
+		//11/30 과제-2
+		System.out.println("시작값~"+lastNum+"까지"+increNum+"씩 증가한 수를 더한 결과="+hap);	
+				
+		
+		
+		
+		
+		/* 구구단 중 5단만 출력 */
+		System.out.println("5X"+1+"="+(5*1));
+		System.out.println("5X"+2+"="+(5*2));
+		System.out.println("5X"+3+"="+(5*3));
+		System.out.println("5X"+4+"="+(5*4));
+		System.out.println("5X"+5+"="+(5*5));
+		System.out.println("5X"+6+"="+(5*6));
+		System.out.println("5X"+7+"="+(5*7));
+		System.out.println("5X"+8+"="+(5*8));
+		System.out.println("5X"+9+"="+(5*9));
+		
+		System.out.println(""); // 구분줄
+		
+		for(i=1;i<=9;i++) {
+			System.out.println("5X"+i+"="+(5*i));
+		}
+
+
+		System.out.println(""); // 구분줄
+		
+		
+		/** 키보드로 입력받은 단 출력 **/
+		System.out.println("출력할 단 입력>");
+		int dan = sc.nextInt();
+		
+		for(i=1;i<=9;i++) {
+			System.out.println(dan+"X"+i+"="+(dan*i));
+		}
+		//과제-3
+		
+		
+		
+		
+		/** 초기화/증감식 어러개 가능 **/
+
+		int k;
+		for(i=1, k=10 ; k>=1 ; i++, k--) { //10번 반복
+			System.out.println(i+"+"+k+"="+(i+k));
+		}
+		
 	}
-		
-		
-		
 }
+
 
 

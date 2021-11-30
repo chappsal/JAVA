@@ -1,4 +1,5 @@
 /*
+ /*
  * 클래스 종류 3가지 : 모든 클래스에는 생성자가 존재한다.
  * 1. 라이브러리용(=설계도) : main() 없음.
  *                      옵션:멤버변수(=필드),메서드들()
@@ -242,7 +243,7 @@ public class IfSwitch {
 		
 
 	
-		
+		System.out.println("----do~while문 카페 주문 처리 시작------------");
 		
 		int i = 1;
 		do{
@@ -267,8 +268,36 @@ public class IfSwitch {
 		}while(i<=1);
 	
 		
-		System.out.println("그만 주문하겠습니다.");
+		
+		/*풀이 2
+		 
+		String order;
+		do{
+			System.out.print("메뉴(아메리카노,카페라떼,카푸치노)중에서 주문(단,주문안함 또는 stop)");
+			order = sc.next(); //주문안함
+			
+			if(order.equals("주문안함")) {
+				break;//가장 가까운 반복문을 빠져나감
+			}
+			
+			
+			
+			switch(order) {
+			case "아메리카노" : System.out.println( order +"를(을) 주문하셨습니다."); break;
+			case "카페라떼" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "카푸치노" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "stop" :  System.out.println("그만 주문하겠습니다."); break;
+			default: System.out.println( "메뉴에 없습니다."); 
+			}
+			//
+			//[과제-1] stop을 제외한 4가지 경우는 조건문이 참, stop만 거짓
+		}while(!order.equialsIgnoreCase("stop"));
+		}while(!order.equialsIgnoreCase("stop")!=true);
+		
+		*/
+		
 		System.out.println("do~while문 카페 주문 처리 끝");
+		
 		
 		
 		
@@ -310,3 +339,4 @@ public class IfSwitch {
 	
 	
 }// class 끝, 커서 올려두면 뭔지 나옴
+
