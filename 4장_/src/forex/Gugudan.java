@@ -45,10 +45,12 @@ public class Gugudan {
 				
 		
 		
-		//[과제1]
+		//[과제1] 풀이 1 : *제 몇 단* 을 for문으로 따로 출력
 		System.out.println("[과제] 2-2.구구단 출력: 옆으로 출력 + 제 몇 단");
 		System.out.println("");// 구분용 빈줄
 		
+		
+	
 		for(int k=2;k<=9;k++) {
 			System.out.print("제 "+k+"단	");
 		}
@@ -64,7 +66,49 @@ public class Gugudan {
 		
 		
 		
+		// 풀이 2 : *제 몇 단* 을 중첩된 for문 속 if문을 사용하여 출력---------------------------------------------------
+		/* System.out.println("2-2. 구구단 출력 : 옆으로 출력 + 제 몇 단 \n");
+		   
+		   int i, j;
+		   
+		   for (i = 0; i <= 9; i++) { // ★ i값은 0부터 시작
+				for (j = 2; j <= 9; j++) { // j:단
+					if (i == 0) {
+						System.out.print("*제 " + j + " 단*\t"); // '\t'은 제몇단 이후로 탭크기만큼 띄우는 것이 아니라 제몇단을 포함하여 탭크기만큼 띄움 
+					} else
+					System.out.print(j + " X " + i + " = " + (j * i) + "\t");
+				}
+				System.out.println();
+			}
+			System.out.println(); // 구분위한 빈 줄
+		 */
 		
+		
+		
+		// 풀이 3 : *제 몇 단* 을 중첩된 for문 속 if문을 사용하여 출력---------------------------------------------------
+		/*
+		 
+		System.out.println("2-2. 구구단 출력 : 옆으로 출력 + 제 몇 단 \n");
+		
+		for(i=1;i<=9;i++) {
+			
+			if(i==1) {
+				//for(int i=2;i<=9;i++) { 주석
+				for(int k=2; k<=9;k++ {
+					System.out.print("제 "+k+"단	");
+				}
+				//i=1; //주의 다시 1로 변경 
+				System.out.println();
+			}
+			for(j=2;j<=9;j++) { //j:단
+
+				System.out.print(i+"X"+j+"="+(i*j)+"	");
+			}
+			System.out.println(""); // 커서 아래로
+		} System.out.println("");// 구분용 빈줄 
+		
+		
+		*/
 		
 		System.out.println("3-1.구구단 출력: 2단~입력받은 단까지 아래로 출력 ");
 		

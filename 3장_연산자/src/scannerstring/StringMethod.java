@@ -1,3 +1,15 @@
+/*
+ class종류      ( public static void main~ 여기서
+ 
+ 1. main( ) 있는 것 : 실행용
+ 2. main ( ) 없는 것 : 라이브러리용 ex) java.lang.*                        
+ => 3. 실행용+라이브러리용
+
+import는 class앞에 public없으면 같은 패키지 안의 클래스에서만 가능
+                       public있으면 모든 패키지 안의 클래스에서만 가능
+*/
+
+
 package scannerstring;
 
 import javax.print.DocFlavor.STRING;

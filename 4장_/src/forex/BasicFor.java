@@ -240,7 +240,7 @@ public class BasicFor {
 		
 		
 		
-		/** 초기화/증감식 어러개 가능 **/
+		/** 초기화/증감식 여러개 가능 **/
 
 		int k;
 		for(i=1, k=10 ; k>=1 ; i++, k--) { //10번 반복
@@ -249,6 +249,5 @@ public class BasicFor {
 		
 	}
 }
-
 
 

@@ -1,5 +1,4 @@
 /*
- /*
  * 클래스 종류 3가지 : 모든 클래스에는 생성자가 존재한다.
  * 1. 라이브러리용(=설계도) : main() 없음.
  *                      옵션:멤버변수(=필드),메서드들()
@@ -94,7 +93,8 @@ public class IfSwitch {
 		
 		//******************************************************************
 		
-		/* switch()문 : 여러 개 중 하나만 선택하여 실행(if ~ else if ... else문과 호환)
+		/* switch()문 : 여러 개 중 하나만 선택하여 실행(if ~ else if ... else문과 호환, switch문으로 해결할 수 없는 것까지 if문은 해결 가능)
+		 * switch문 sql에서는 decode(), if문 sql에서는 case~end
 		* ()안에 들어갈 수 있는 내용 : 정수, '문자', "문자열"을 결과로 가지는 것 (실수 안됨)
 		* case 정수,'문자',"문자열" 상수만 올 수 있다.
 		*/
@@ -243,7 +243,7 @@ public class IfSwitch {
 		
 
 	
-		System.out.println("----do~while문 카페 주문 처리 시작------------");
+		System.out.println("----1.do~while문 카페 주문 처리 시작------------");
 		
 		int i = 1;
 		do{
@@ -266,7 +266,7 @@ public class IfSwitch {
 			//
 			//[과제-1] stop을 제외한 4가지 경우는 조건문이 참, stop만 거짓
 		}while(i<=1);
-	
+		System.out.println("1.do~while문 카페 주문 처리 끝");
 		
 		
 		/*풀이 2
@@ -291,14 +291,61 @@ public class IfSwitch {
 			}
 			//
 			//[과제-1] stop을 제외한 4가지 경우는 조건문이 참, stop만 거짓
-		}while(!order.equialsIgnoreCase("stop"));
-		}while(!order.equialsIgnoreCase("stop")!=true);
+		}while(!order.equalsIgnoreCase("stop"));
+		}while(!order.equalsIgnoreCase("stop")!=true);
 		
 		*/
+		//System.out.println("do~while문 카페 주문 처리 끝");
 		
-		System.out.println("do~while문 카페 주문 처리 끝");
 		
 		
+		
+		
+		//12-03 과제1 stop입력시 order한잔, order한잔 총 n잔, 총 가격은 n원입니다 (n잔,n잔 할 때 마지막 콤마 없음 주의 스트링메소드에 있음)
+		System.out.println("----2.do~while문 카페 주문 처리 시작------------");
+		
+		int amCnt, cpCnt, cfCnt; //각 메뉴 count 변수 선언 , 아메 카푸 카페
+		
+		String order; //위에서 선언됨
+		do{
+			System.out.print("메뉴(아메리카노:3000원,카페라떼:4000원,카푸치노:3500원)중에서 주문(단,주문안함 또는 stop)");
+			order = sc.next(); //주문안함
+			
+			if(order.equals("주문안함")) {
+				break;//가장 가까운 반복문을 빠져나감
+			}
+			
+						
+			switch(order) {
+			case "아메리카노" :// System.out.println( order +"를(을) 주문하셨습니다."); break;
+			case "카페라떼" : //System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "카푸치노" : System.out.println( order +"를(을) 주문하셨습니다.");  break;
+			case "stop" :  System.out.println("그만 주문하겠습니다."); break;
+			default: System.out.println( "메뉴에 없습니다."); 
+			}
+			//
+			//[과제-1] stop을 제외한 4가지 경우는 조건문이 참, stop만 거짓
+		}while(!order.equalsIgnoreCase("stop"));
+		System.out.println("2.do~while문 카페 주문 처리 끝");
+		
+		
+		
+		
+		
+		
+		System.out.println("--메서드 호출하여 사용하는 방법-------------------------------");
+		System.out.println("1. 같은 클래스 안에 존재하는 static 메서드 호출");
+		
+		int hap = add(3, 7);//add야~ // 클래스명 생략 가능(이유? 같은 클래스 안에 존재하므로), add위에 커서 두면 뜨는 창 맨 앞에 타입 뜸 int
+		System.out.println("결과의 10배="+hap*10);
+		//IfSwitch.add(3,7);//같은반add야
+		
+		System.out.println("2. 같은 클래스 안에 존재하는 static 없는 메서드(=instance 메서드) 호출");
+		IfSwitch ifswitch = new IfSwitch(); // new 클래스명(); <= 생성자, 생성자를 호출하여 객체 생성하면 그 안에 instance 메서드가 존재
+		double hap2 = ifswitch.add(3, 7.0); // 3->3.0 , 7->7.0 자동형변환되어 변수 안에 들어감
+		System.out.println("3+7.0=+"+hap2);
+		
+		ifswitch.add(3.0, 7);
 		
 		
 		sc.close();
@@ -308,14 +355,32 @@ public class IfSwitch {
 	
 	
 	
+	/*
+	 * 메서드 오버로딩 : 같은 이름의 메서드(단, 매개변수의 수나 타입이 달라야 한다)
+	 */
 	
 	
+	/* [메서드 만드는 법] 
+	 * 결과를 돌려주는 타입(돌려주는 결과가 없으면 void) + 메서드명(매개변수 선언){
+	 *		return 돌려줄 결과
+	 * }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	
-	//결과를 돌려주는 타입 + 메서드명(매개변수 선언){}
 	static int add(int n1, int n2){ // 매개변수 = 인수 = 인자 = argument (매개변수는 '지역변수=로컬변수'이다.)
 		return n1+n2; // int+int => int => 결과로 돌려줄 때 double 타입으로 자동형변환
 	}
 		
+	
+	static double add(int n1){  // static int add 일 때 => 위와 메서드 이름이 같지만 매개변수 수가 달라서 허용
+		return n1; //int n1이 double n1으로 자동형변환되어 결과 리턴
+	}
+	
+	
 	
 	double add(double n1, double n2){
 		return n1+n2;
@@ -324,12 +389,19 @@ public class IfSwitch {
 	
 	
 	void add(double n1, int n2) { 
-		System.out.println(n1+n2); // 19.2 결과를 출력만하고 리턴하지 않음
+		System.out.println(n1+"+"+n2+"="+(n1+n2)); // 19.2 결과를 출력만하고 리턴하지 않음
 	}   
 
 	// 같은 이름의 add 를 만드는 것은 목적에 따라 add를 호출하기 위해
+
 	
-	
+	//void이지만 return 있을 수 있는 예
+	void add(int n1, int n2, int n3) { 
+		if(n1==0) return; // return => 메서드 종료 시킴
+		System.out.println(n1+n2+n3); 
+	}   
+
+		
 	static char parseChar(int n){
 		return (char)n;
 		
@@ -339,4 +411,6 @@ public class IfSwitch {
 	
 	
 }// class 끝, 커서 올려두면 뭔지 나옴
+
+
 
