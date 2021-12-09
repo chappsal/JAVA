@@ -1,6 +1,4 @@
-
 import java.lang.*; // 이클립스가 컴파일 전에 자동 삽입해줌
-
 public class UseVariable { //클래스명:대문자로 시작
 
 	public static void main(String[] args) { //소문자로 시작~():메서드-메서드 안에 선언한 변수를 지역변수
@@ -41,42 +39,8 @@ public class UseVariable { //클래스명:대문자로 시작
 		
 	/*
 	 * 자료형 변수명=리터럴
-	 * 리터럴(이름없는 메모리에 저장):정수
-	 *   - 정수  
-
-		 1 byte
-		 2 short
-		 4 int 젤 많이 사용
-		 8 long
-
-		 늘릴때는 자동형변환 되는데 반대로는 강제형변환 해야됨, 정수는 실수로 자동 , 실수는 정수로 강제
-		 정수 4바이트 실수 8바이트
-
-
-		long s2  =10000000000000;
-		자료형 변수명=리터럴
-
-		리터럴(이름없는 메모리에 저장):정수-int타입(4바이트) 저장  ,  L : 8바이트
-		                                      실수-double 타입(8바이트) 저장  ,  F / f : 4바이트  
-
-
-		long s2=10000000000000;  // 10000000000000 은 4바이트에 넣기 커서
-
-		long s2=10000000000000L; // L:4->8바이트로 변경
-
-		int s3=10000000000000L; 이렇게 안됨
-		int s3=(int)10000000000000L; 가능 , 괄호 사용해서 int 로 변경 = 강제형변환 but 데이터 손실 발생할 수 있음
-
-
-
-
-		정수는 cpu의 연산장치 4바이트(int)에 담겨 연산됨, 따라서 연산결과도 4바이트
-
-		short sh3= sh1 + sh2; // sh3(2바이트)=12+7(4바이트)
-		*/
-		
-		
-		
+	 * 
+	 * */
 		long s2=10000000000000L;
 		System.out.println(s2);
 		
@@ -97,7 +61,6 @@ public class UseVariable { //클래스명:대문자로 시작
 		/*
 		 * 정수는 cpu의 연산장치 4바이트(int)에 담겨 연산됨, 따라서 연산결과도 4바이트
 		 */
-		
 		short sh1=12, sh2=7;
 		short sh3= (short) (sh1 + sh2); // sh3(2바이트)=12+7(4바이트)
 		System.out.println(sh3);
@@ -167,7 +130,7 @@ public class UseVariable { //클래스명:대문자로 시작
 		/* 자바는 유니코드 : 문자 2바이트=16bit(16로 표현가능한 정보의 수:65536
 		정수 0~65535
 		*/
-		i5 = 0xac00;// 0x16진수(hex=16진수:0~9ABCDEF) 헥사
+		i5 = 0xAC00;// 0x16진수(hex=16진수:0~9ABCDEF) 헥사
 		System.out.println("16진수"+i5); //44032
 		System.out.println("(char)16진수AC00="+(char)i5); //'가'
 		
@@ -175,14 +138,25 @@ public class UseVariable { //클래스명:대문자로 시작
 		System.out.println("16진수"+ch1); //44032
 		System.out.println("(char)16진수AC00="+(int)ch1); //'가'
 		
-		int i6=077;// 08진수(9진수:0~7)
-		System.out.println("8wlstn77+i6");
+		int i6=077;// 0 : 8진수(9진수:0~7)
+		System.out.println("8진수77+i6"); // 정수출력은 10진수로 출력
 		
-		i6 = 0B1010; //0B2진수(2진수:0,1);
+		i6 = 0B1010; //0B : 2진수(2진수:0,1);
 		System.out.println("2진수1010"+i6);
 		
-		i6 = 0x1010;
+		i6 = 0x1010; //0x16진수 (16진수:0~9abcdef)
 		System.out.println("16진수1010="+i6);
+		
+		
+		/* printformat() */  //별로 안 중요
+		
+		i6 = 0xac00; //%d(decimal):10진수, 5%x(hex):16진수, %o(octal:8진수), %b:true(값이 있으면(모든 수,문자,true))/false
+		System.out.printf("[정수]10진수=%15d, 16진수=%x, 8진수=%o, [boolean타입]=%b \n",i6, i6, i6, i6,'a', false); // f사용후에 \n으로 줄 바꿈 필수
+		System.out.printf("[실수]=%.1f", 12.34); // %f(float)  .1 => 소수 첫째 자리까지 출력
+		
+		String str = "문자열 출력2";
+		System.out.printf("[문자열]=%s, %s \n", "문자열 출력1", str);
+		
 		
 		//교재 55p
 		int a = 65; // 65의 2진수

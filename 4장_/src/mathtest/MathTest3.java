@@ -1,3 +1,5 @@
+// 전체종료 추가, 1,2,3외에 입력시 처리하는 방법
+
 package mathtest;
 
 import java.util.Scanner;
@@ -16,7 +18,7 @@ public class MathTest3 {
 			// int menu = sc.nextInt(); // nextInt는 정수만 가능한데 전체종료는 문자열이기 때문에 읽어들이지 못 함
 			// (1) 1->"1" 2->"2" 3->"3" /(2) 4->"4" a->"a" ab->"ab" 가나->"가나" /(3) "stop"
 			// "Stop" // 입력되는 모든 경우의 수를 따져서 처리할 방법 만들어야 함
-			// 처리순위 3 =>
+			
 
 			String tmp = sc.next(); // tmp:임시변수
 

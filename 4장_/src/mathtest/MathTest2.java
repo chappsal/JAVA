@@ -1,3 +1,5 @@
+// 계산 종료 추가
+
 package mathtest;
 
 import java.util.Scanner;
