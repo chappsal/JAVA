@@ -5,6 +5,8 @@ package math;
 import java.util.Scanner;
 
 //같은 패키지 안에 있는 클래스는 자동 import됨
+//import java.lang.*; 도 자동 import됨
+import static java.lang.Math.*;
 
 public class MathMain {
 
@@ -55,9 +57,12 @@ public class MathMain {
 		System.out.println("10x20x30x40x50="+Math.mul(10, 20, 30, 40, 50));
 		
 		
+		System.out.println("** java.lang.Math의 메서드 호출 **");
+		System.out.println(" |-3|= " + abs(-3)); // 위에서 import해오면 java.lang.Math. 생략가능
+		//java.lang.Math안의 모든 필드와 메서드는 static이다(단, 생성자 제외: private)
 		
 		
-		
+		System.out.println("2와 8중 큰 수="+java.lang.Math.max(2, 8));
 		
 		
 		
@@ -68,4 +73,5 @@ public class MathMain {
 	
 	}
 
-} 
+
+}

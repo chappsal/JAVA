@@ -65,6 +65,8 @@ public class UseVariable { //클래스명:대문자로 시작
 		short sh3= (short) (sh1 + sh2); // sh3(2바이트)=12+7(4바이트)
 		System.out.println(sh3);
 
+		sh1 += sh2; // [자동형변환 규칙 예외] 복합대입연산자를 사용하면 자동으로 형변환되어 대입함 (int =>short)
+		
 		short sh4=30000, sh5=30000; 
 		int sh6= sh4 + sh5; // 연산결과 int->long 으로 자동형변환되어 저장
 		System.out.println(sh6);

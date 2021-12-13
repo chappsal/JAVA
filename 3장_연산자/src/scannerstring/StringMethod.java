@@ -26,6 +26,12 @@ public class StringMethod {
 		String str2 = "문자열 상수"; 
 		String str3 = new String("문자열 상수"); // 2. new 생성자();로 호출하여 객체 생성
 	
+		
+		System.out.println(str1); // str1 : String 객체의 주소 => 결과로 "문자열 상수" 출력
+		//Object의 toString()메서드를 대부분의 라이브러리 클래스에서는 재정의하여 우리에게 제공함
+		System.out.println(str1.toString()); // 결과로 "문자열 상수" 출력
+
+		
 		//s1주소 == s2 주소
 		if(str1 == str2) System.out.println("같은 주소이므로 같은 문자열객체를 참조한다.");
 		else System.out.println("다른 주소이므로 다른 문자열객체를 참조한다.");

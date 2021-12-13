@@ -27,7 +27,7 @@ public class Math { // public 떼면 같은 패키지에서만 사용 가능 => 
 	
 	//2. 기본생성자 public Math(){super();}
 	private Math(){} // <=생성자. 생성자가 있으면 기본생성자 없음 , 없으면 윗줄의 기본생성자를 컴파일러가 자동으로 만들어줌 // private붙으면 같은 패키지 다른 클래스에서 접근 불가, 호출 불가 
-	                 // 같은 패키지에서는 public 없어도 사용 가능
+	                 // 같은 패키지에서는 public 없어도 사용 가능 // 객체를 생성하지 않기 위해 , 모든게 static이기 때문에 만들 필요 없음
 	
 	//3. 메서드(소문자로 시작~()):기능
 	
@@ -57,12 +57,12 @@ public class Math { // public 떼면 같은 패키지에서만 사용 가능 => 
 		
 	// 두 정수를 곱하여 결과를 리턴하는 메서드
 	static int mul(int a, int b){
-		return a*b;  
+		return a*b;
 	}
 	
 	// ★★  ... 가변인수 : 여러 매개값들을 "배열"로 처리(매개값은 매개변수로 받음)(main에서 던져주는 매개값)(매개변수=인수=argument) 
-	static int add(int...n){// Math.add(10,20,30) 호출시 배열객체 생성됨[10,20,30] //연속된 배열 객체가 생성되고 index번호는 0부터// 배열은 for문과 세트
-		int hap=0;
+	public static double add(double...n){// Math.add(10,20,30) 호출시 배열객체 생성됨[10.0,20.0,30.0] //연속된 배열 객체가 생성되고 index번호는 0부터// 배열은 for문과 세트
+		double hap=0;                    // 매개인수를 int => double로 바꾸면 ... => [] 로 바뀜
 		
 		int i; // index번호: 0부터 시작
 		for(i=0;i<n.length;i++) { // length: 배열에 존재하는 멤버변수(길이, 읽기 전용)
@@ -72,7 +72,7 @@ public class Math { // public 떼면 같은 패키지에서만 사용 가능 => 
 	}
 	
 	
-	static int mul(int...n) {
+	public static int mul(int...n) {
 		int result=1;
 		int i;
 		for(i=0;i<n.length;i++) {
@@ -80,6 +80,24 @@ public class Math { // public 떼면 같은 패키지에서만 사용 가능 => 
 		}
 		return result;
 	}
+	
+	
+	public static double mul(double...n){
+		double result=1;
+		int i;
+		for(i=0;i<n.length;i++) {
+			result*=n[i]; 
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
