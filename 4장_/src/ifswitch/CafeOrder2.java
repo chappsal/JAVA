@@ -8,7 +8,7 @@ public class CafeOrder2 {
 
 		System.out.println("-----2.do~while 카페 주문시작-------------------------------------------------");
 
-		Scanner scanner = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		String order = null;
 
 		// 각 메뉴 카운트 변수 선언
@@ -24,7 +24,7 @@ public class CafeOrder2 {
 
 		do {
 			System.out.print("메뉴(아메리카노:3000원, 카페라떼:4000원, 카푸치노:3500원)중에서 주문(단, 주문안함 또는 stop)>");
-			order = scanner.next(); // "주문안함"
+			order = sc.next(); // "주문안함"
 
 			if (order.equals("주문안함"))
 				break; // 가장 가까운 반복문 빠져나감

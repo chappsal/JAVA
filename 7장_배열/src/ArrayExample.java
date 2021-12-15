@@ -109,15 +109,19 @@ public class ArrayExample {
 		// 12/13 과제 1
 		// A,B,C, 에서 마지막 콤마 제외하고 [A, B, C] 출력 : 반복문 for 이용 + 조건연산자(조건문)?참:거짓  또는 다른 방법들 이용
 		System.out.println("과제1");
-		
 		String temp="";
 		
-		for(i=0;i==ch.length;i++) { 
-			temp += (i<ch.length-1) ? ch[i]+", ": "]";
-				
+		for(i=0;i<ch.length;i++) {
+			if(i==ch.length-1) {
+				temp += ch[i];
+			}
+			else {
+			temp += ch[i]+", ";
+			}
 			
-		} System.out.println(temp);
-		System.out.println();
+			
+		}
+		System.out.println("["+temp+"]");
 		
 		
 		
@@ -189,18 +193,19 @@ public class ArrayExample {
 		// 12/13 과제 2
 		// sco1가 참조하는 값들을 0으로 변경 후 [0, 10, 20]
 		System.out.println("과제2");
-	
-	
-		
-		for(i=0; i<sco1.length; i++ ) {
-			sco1[i]-=10;
-			
-			sco1[i]= sco1[i]+10;
+
+		int c;
+		for(c=0,i=1; i<sco1.length;c++) {
+			if(sco1[2]==0) {
+			sco1[i]= sco1[i-1]+10;
+			i++;
+			} else
+			sco1[c]-=10;
 		} System.out.println(Arrays.toString(sco1));
-			
 		
 		
-		System.out.println("과제2끝");
+		
+
 		// 12/13 과제 3
 		/*
 		 *  키보드로부터 학생 수를 입력받아 sco2가 참조하는 배열객체 생성 후
