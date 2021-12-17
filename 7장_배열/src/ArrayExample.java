@@ -321,7 +321,12 @@ public class ArrayExample {
 		// 방법 2
 		// System.out.printf("합 = " + sum + ", 평균 = " + (double)sum/sco2.length);
 		
+		
+		
 		/*************************  배열 선언 후 배열목록 생성 방법 2   ***************************/
+		
+		
+		
 		//방법1
 		int[] sco4= new int[3]; //[0,0,0] 기본값
 		
