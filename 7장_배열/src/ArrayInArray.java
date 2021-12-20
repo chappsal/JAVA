@@ -69,7 +69,7 @@ public class ArrayInArray {
 		/*
 		 * 12/17 과제 1
 		 * 중첩된 for문을 이용하여 아래 내용 출력
-		 * [98,100,87]
+		 * [95,100,87]
 		 * [83,92,78] 
 		 * 
 		 */
@@ -85,17 +85,32 @@ public class ArrayInArray {
 				if( j == 0 ) {
 					System.out.print( "[" + m[i][j] + "," );
 				} else if ( j != m[i].length-1 ) {
-				System.out.print(m[i][j]+",");
+					System.out.print(m[i][j]+",");
 				} else {
 					System.out.println(m[i][j]+"]");
 				}
+			}
+		}
+
+		
+		// 풀이 1
+		
+		for(i=0; i<m.length; i++) {
+			
+			for(j=0; j<m[i].length; j++) {
+				
+				if( j == 0 ) System.out.println("[");
+				System.out.println(m[i][j] + ( (j != m[i].length-1)? ", " : "]\n"));
+				
 			}
 		}
 		 
 		 
 		 
 		 
-		 System.out.println();
+		 
+		 
+		 
 		//---------------------------------------------------------------
 
 		/******* 2차원 배열 선언하는 방법 - 2 ******************/
@@ -172,54 +187,84 @@ public class ArrayInArray {
 		//[85, 99]
 		//[88, 100, 95]
 
+
 		for(i=0; i<e.length; i++) {
-					
-					for(j=0; j<e[i].length; j++) {
 						
-						if( j == 0 ) {
-							System.out.print( "[" + e[i][j] + "," );
-						} else if ( j != e[i].length-1 ) {
-						System.out.print(e[i][j]+",");
-						} else {
-							System.out.println(e[i][j]+"]");
-						}
-					}
-				}System.out.println();
+			for(j=0; j<e[i].length; j++) {
+							
+				if( j == 0 ) {
+					System.out.print( "[" + e[i][j] + "," );
+				} else if ( j != e[i].length-1 ) {
+					System.out.print(e[i][j]+",");
+				} else {
+					System.out.println(e[i][j]+"]");
+				}
+			}
+		}
 		
+		//풀이 2
+		System.out.println();
+		System.out.println("---------[과제1-2] 풀이 2--------");
+		
+		for(i=0; i<e.length; i++) {
+			System.out.print("[");
+			for(j=0; j<e[i].length; j++) {
+						
+				System.out.print(e[i][j] + ( (j != e[i].length-1)? ", " : ""));
+				
+			}
+			System.out.print("]\n");
+		}
+		 
 		
 		
 		/******* 2차원 배열 선언하는 방법 - 3 **********************/
-		System.out.println("***** 2차원 배열 선언하는 방법 - 3 *****");
+		System.out.println();
+		System.out.println("*** 2차원 배열 선언하는 방법 - 3 ***");
 		
 		int[][] s = new int[2][];
 		
 		s[0] = new int[] {87,93}; // 기본값이 아닌 '초기값 배열' 생성
 		s[1] = new int[] {97, 88, 100};
 		
+		
 		System.out.println();
 		System.out.println("---------[과제1-3] : s가 참조하는 배열---------");
 		
 		
 		for(i=0; i<s.length; i++) {
-			
-			for(j=0; j<s[i].length; j++) {
 				
+			for(j=0; j<s[i].length; j++) {
+					
 				if( j == 0 ) {
 					System.out.print( "[" + s[i][j] + "," );
-				} else if ( j != s[i].length-1 ) {
-				System.out.print(s[i][j]+",");
+				} else if ( j != s[i].length-1 ) {				
+					System.out.print(s[i][j]+",");
 				} else {
 					System.out.println(s[i][j]+"]");
 				}
 			}
-		}System.out.println();
+		}
 		
+		//풀이 2
+		System.out.println();
+		System.out.println("----[과제1-3] : (향상된 for문 ) + substring()----");
+		//String temp ="";
 		
-	
+		for( int[] arr : s ) {
+			System.out.print("[");
+			String temp =""; // ★★선언 위치 주의 : for문 밖에 선언하면 기존 값에 계속 누적 됨, 값을 초기화 시켜야 한다 
+			for( int value : arr ) {
+				temp += value + ", ";
+			}
+			System.out.print(temp.substring(0, temp.length()-2));
+			System.out.print("]\n");
+		}
+		 
+		
 		/******* 2차원 배열 선언하는 방법 - 4 **********************/
-		
-		
-		System.out.println("***** 2차원 배열 선언하는 방법 - 4 *****");
+		System.out.println();
+		System.out.println("*** 2차원 배열 선언하는 방법 - 4 ***");
 		int[][] java = {
 				
 				{95, 97},          // 1반 2명, java[0].legnth == 2
@@ -227,7 +272,7 @@ public class ArrayInArray {
 				{100, 88, 92}      // 3반 3명, java[2].legnth == 3
 		};
 				
-
+		
 		
 		/*
 		 *  12/17 과제 2 
@@ -235,28 +280,54 @@ public class ArrayInArray {
 		 *  java 성적의 총 합과 총 평균 구하기
 		 *  중첩된 for문
 		 */
+		
 		System.out.println();
 		System.out.println("------------[과제2]------------");
-		
-		
+			
+			
 		j=0;
-		int sum=0;
+		int sum=0; 
+		int stuNum=0;
+		int totalSum=0;
+		
 		
 		for(i=0; i<java.length; i++) {
 			sum=0;
 			for (j=0; j<java[i].length; j++ ) {
 				sum += java[i][j];
-			} System.out.println( "java[" + i + "]반 성적 합=" + sum + ", 평균=" + ((double)sum/j) );
+			} 
+			System.out.println( "java[" + i + "]반 성적 합=" + sum + ", 평균=" + ((double)sum/j) );
+			//System.out.printf("%d반의 합=%d, 평균=%.2f \n" , i=1, sum, (double)sum/java[i].length);
+			totalSum += sum;
+			stuNum += j;
 		} 
+		System.out.println();  
+		System.out.println( "모든 반의 성적 총 합=" + totalSum + ", 총 평균=" + ((double)totalSum/stuNum) );
+		//System.out.printf("모든 반의 성적 총 합=%d, 평균=%.2f", totalSum, (double)totalSum/stuNum);
+
+		
+		
 		
 		System.out.println();
-		sum=0;
+		System.out.println("---------[과제2] 향상된 for---------");
 		
-		for(i=0; i<java.length; i++) {
-			for (j=0; j<java[i].length; j++ ) {
-				sum += java[i][j];
+		totalSum=0;
+		stuNum=0;
+		int classNum=1;
+		
+		for(int[] arr:java) {
+			sum=0;
+			for (int value:arr) {
+				sum += value;
+				totalSum += value;
+				stuNum++;
 			} 
-		} System.out.println( "모든 반의 성적 총 합=" + sum + ", 총 평균=" + ((double)sum/j) );
+			System.out.println( "java[classNum]반 성적 합=" + sum + ", 평균=" + ((double)sum/arr.length) );
+			//totalSum += sum;
+		} 
+		System.out.println();  
+		System.out.println( "모든 반의 성적 총 합=" + totalSum + ", 총 평균=" + ((double)totalSum/stuNum) );
+		
 		
 		
 		
