@@ -136,21 +136,21 @@ public class ArrayCopyRandomExample {
 		 *  최종 출력
 		 *  ['J', 'A', 'V', 'A',   ,   ,   ] => ['J', 'A', 'V', 'A', ! , ~ , * ] 
 		 */
-		int num = arr.length;
+		
 		Scanner sc = new Scanner(System.in);
+		int num = arr.length;
 		
 		
 		System.out.print("배열 크기를 입력하세요>");
 		int arrSize = sc.nextInt();
 		char[] newArr = Arrays.copyOf(arr, arr.length+arrSize);
 		
-
 		for(i=1; i<=arrSize; i++) {
 			System.out.print("배열에 추가할 값을 입력하세요>");
 			String str = sc.next();
 			char ch2 = str.charAt(0);
-			
-			ch2='\0';
+			newArr[num] = ch2;
+			num++;
 		}
 		
 		System.out.println(Arrays.toString(newArr));
