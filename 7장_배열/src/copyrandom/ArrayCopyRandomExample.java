@@ -75,9 +75,9 @@ public class ArrayCopyRandomExample {
 		//for문을 이용하여 항목 값을 모두 'a'로 변경 후 출력
 		
 		
-		for(i=0; i<=ch.length; i++) {
+		for(i=0; i<ch.length; i++) {
 			//ch[i] = (char)(ch[i]+32);
-			//ch[i]+=32; // 복합 대입 연산자를 사용하면 형 변환 필요 없음
+			ch[i]+=32; // 복합 대입 연산자를 사용하면 형 변환 필요 없음
 		}
 		System.out.println(Arrays.toString(ch));
 		
@@ -136,27 +136,83 @@ public class ArrayCopyRandomExample {
 		 *  최종 출력
 		 *  ['J', 'A', 'V', 'A',   ,   ,   ] => ['J', 'A', 'V', 'A', ! , ~ , * ] 
 		 */
-		
+			
 		Scanner sc = new Scanner(System.in);
+
 		int num = arr.length;
 		
 		
 		System.out.print("배열 크기를 입력하세요>");
-		int arrSize = sc.nextInt();
-		char[] newArr = Arrays.copyOf(arr, arr.length+arrSize);
+		int arrSize = sc.nextInt();                           
+
+		char[] newArr = Arrays.copyOf(arr, arr.length+arrSize); // 새 배열 생성
 		
 		for(i=1; i<=arrSize; i++) {
 			System.out.print("배열에 추가할 값을 입력하세요>");
 			String str = sc.next();
 			char ch2 = str.charAt(0);
+
 			newArr[num] = ch2;
 			num++;
 		}
 		
 		System.out.println(Arrays.toString(newArr));
 		
+		//풀이2 --------------------------------------------------------------------
+		System.out.println();
+		System.out.println("과제2 : 풀이 1");
+		
+		System.out.print("증가시킬 배열 크기 입력>");
+		int size = sc.nextInt();
+		
+		char[] arr5 = Arrays.copyOf(arr, arr.length+size);
+		System.out.println(Arrays.toString(arr5));
+		
+		for(i=arr.length; i<arr5.length; i++) {
+			System.out.print("하나의 문자 입력>");
+			String temp = sc.next();
+			
+			if(temp.length()!=1) {
+				System.out.print("하나의 문자만 입력해주세요");
+				i--;
+				continue;				
+			}
+			
+			arr5[i] = temp.charAt(0);
+		}
+		System.out.println(Arrays.toString(arr5));
 		
 			
+		//풀이3 -----------------------------------------------------------------------
+		System.out.println();
+		System.out.println("과제2 : 풀이 2");
+		
+		System.out.print("증가시킬 배열 크기 입력>");
+		size = sc.nextInt();
+		
+		char[] arr6 = Arrays.copyOf(arr, arr.length+sc.nextInt());
+		System.out.println(Arrays.toString(arr6));
+		
+		boolean flag = true;
+		String str2 = null;
+		
+		while(flag) {
+			
+			System.out.print("빈 곳에 추가로 입력할 문자 한번에 입력>");
+			str2 = sc.next();
+			if(str2.length() != size) {
+				System.out.print("빈 곳에 입력할 문자 길이로 적합하지 않습니다. 다시 입력해주세요");
+				continue;
+			} else break;
+		} 
+		
+		char[] strCharArray = str2.toCharArray(); // String->char형 배열로 변환
+		System.arraycopy(strCharArray, 0, arr6, arr.length, size);
+		
+		System.out.println(Arrays.toString(arr6));
+		
+		
+		
 	}//main
 
 
