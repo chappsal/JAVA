@@ -5,8 +5,8 @@ public class Buyer {
 	private int firstMoney; //원금 
 	private int money;   //현재잔액 
 	//final int money;   // final은 기본값이 없음
-	int numOfApple; 	 // 현재 사과수 
-	int firstNumOfApple; //기존 사과수
+	int numOfApple; 	 //기존 사과수 + 구매한 사과수
+	int firstNumOfApple; //구매한 사과수
 	
 	
 	//기본생성자 public Buyer(){super();} 보이지 않지만 생성, 클래스 앞에 public 붙으면 생성자 앞에도 붙음
@@ -31,7 +31,7 @@ public class Buyer {
 		money = money2;
 		firstMoney = money2;  // this 생략 가능(이유: 같은 클래스 안에 있으므로, 멤버변수와 매개변수 이름이 달라서 구분되므로)
 		
-		firstNumOfApple = numOfApple;
+		firstNumOfApple -= numOfApple;
 		this.numOfApple = numOfApple;
 		//this. : 자기자신의 주소로 해당 객체 안에 존재 (붙인 이유: 멤버변수와 매개변수를 구분하기 위해. static이 없는 멤버변수에 this로 접근)
 	}
@@ -59,8 +59,11 @@ public class Buyer {
 	//해당 판매자에게 돈을 주고 사과를 산다.
 	void buy(Seller s, int money) { //판매자1, 돈 5000)
 		numOfApple += s.sale(money); //증가:구매자의 사과바구니에, 판매자에게 돈을 주고 받은 사과를 추가
-		money = firstMoney - money;  //감소:구매자의 기존 돈-판매자에게 사과를 구매한만큼의 돈 = 현재잔액
+		firstMoney -= money; 		 //감소:구매자의 기존 돈-판매자에게 사과를 구매한만큼의 돈 = 현재잔액
 	}
+	
+	
+	
 	
 	
 	//구매자의 현황
