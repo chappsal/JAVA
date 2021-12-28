@@ -88,7 +88,7 @@
  * ----------------------------------------------------
  * 
  * [final]
- * 1. final class 클래스명 : 부모가 될 수 없음(=상속불가), 마지막 자식이므로
+ * 1. final class 클래스명 : 부모 클래스가 될 수 없음(=상속불가), 마지막 자식이므로
  * 2. final 멤버 변수 : 값 변경 불가
  * 3. final 메서드 : 재 정의 불가 
  * 
@@ -112,12 +112,12 @@ package book;
 
 public class Book {
 	//1.멤버변수(=필드) : 속성
-	String bookName;   //책제목
-	String bookAuthor; //책저자
+	public String bookName;   //책제목
+	private String bookAuthor; //책저자
 	
 	final int bacode; //각 책의 바코드 값을 다르게 설정하고 싶을 때 - 생성자를 통해 최초의 1번만 초기화
 	
-	static final int BOOKPRICE; //책가격
+	public static final int BOOKPRICE; //책가격
 	
 	
 	/*
@@ -133,20 +133,23 @@ public class Book {
 		}
 		BOOKPRICE = hap;
 		
-		//메서드 호출 결과
-		//BOOKPRICE = hap(10,100); => 오류 : final이므로 값 변경 불가, BOOKPRICE = hap; 주석 처리시 오류 해제
+		//메서드 호출 결과 : 반드시 static 메서드만 호출 가능
+		//BOOKPRICE = hap(10,100); //=> 오류 : final이므로 값 변경 불가, BOOKPRICE = hap; 주석 처리시 오류 해제
 	}
 	
 	/*
 	 * instance 초기화 블록 : 생성자가 호출되기 직전 초기화 블록이 실행 됨
 	 * 언제 사용? '복잡한 계산'을 하거나 '메서드 호출 결과'를 초기값으로 세팅할 때
 	 */
+	/*
 	{
 		System.out.println("*** 초기화 블록 ***");
 		bacode = Math.abs(-12345)+10;
 		//bacode += 10; // 오류 : final이므로 값 변경 불가
 	}
-	
+	*/
+
+
 	/*
 	 * 2. 생성자 반드시 존재
 	 * [생성자 역할] : 멤버 변수에 값을 채워 객체 생성
@@ -180,7 +183,47 @@ public class Book {
 	 * 
 	 */
 	
+	public Book() {
+		super();
+		bacode = 11111; //각 개체의 바코드 값 동일해짐
+		//'초기화 블록 주석해제'하면 오류 => why? final 때문. 초기화 블록을 통해 초기화 후 생성자를 통해 값 변경 불가
+		
+	}
 	
+	
+	public Book(String bookName, String bookAuthor) {
+		//super(); 
+		//this.bookName = bookName;  
+		//this.bookAuthor = bookAuthor; 
+		//bacode = 12345; //모든 바코드 값 동일해짐
+		this(bookName, bookAuthor,12345); //매개변수가 없는 생성자 호출 , 위 여러줄을 한줄로 작성 가능
+		
+		/* this(); 위에는 어떠한 실행문도 있어서는 안 됨 (super도 안 됨) 
+		 *  
+		 * 1. this()를 이용하여 다른 생성자를 호출할 때는 첫번째 줄에 super(); 호출 불가 
+		 * 	  why? 두개의 부모가 생성되므로. java는 단일 부모, 단일 상속
+		 * 2. 부모 생성 후 자식의 멤버 변수에 값을 채워 자식 객체를 생성하므로. 즉, 부모->자식 순서
+		 */
+		
+		
+	}
+
+	
+	public Book(String bookName, String bookAuthor, int bacode) {
+		super(); //반드시 생성자의 첫 줄에.    1.부모(Object)생성자 호출 => 부모 객체 생성
+		this.bookName = bookName;  // 2.자식의 각 멤버 변수에 값을 채워 자식 객체 생성
+		this.bookAuthor = bookAuthor; // this.생략불가 (멤버 변수와 매개 변수의 이름이 같아 구분하기 위해)
+		this.bacode = bacode; // 매개값에 따라 바코드 값 달라짐
+	}
+	
+	/*
+	 * 3. 메서드 : 기능
+	 * get~() : 멤버변수의 값을 얻어올 때
+	 * set~(매개변수) : 전달 받은 매개 값으로 멤버 변수의 값을 변경할 때 
+	 */
+	
+	
+	//********* static O *********//
 	//메서드 호출 결과  //메서드생성
 	static int hap(int start, int end){
 		int hap=0;
@@ -189,10 +232,85 @@ public class Book {
 		}
 		return hap;
 	}
+
 	
+	static int getBookprice() {
+		return Book.BOOKPRICE; //Book.생략가능
+		// (단, this는 사용불가 => static 메서드는 객체 생성 이전에 이미 메모리에 올라가 있으므로)
+	}
+
 	
+	//********* static X **********
+	String getBookName() {
+		return bookName;
+	}
+
+
+	void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+
+	String getBookAuthor() {
+		return bookAuthor;
+	}
+
+
+	void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
+	}
+
+
+	int getBacode() {
+		return bacode;
+	}
+
+	public void showBookInfo(){ //this. Book. 생략 가능 : 같은 클래스 안에 있어서 // b1.getBookAuthor() => this.bookAuthor() 변경 가능 :같은 클래스 안에 있어서
+		System.out.println("책 바코드=" + this.bacode + ", 책 제목=" + bookName + ", 책 저자=" + this.bookAuthor + ", 책 가격=" + BOOKPRICE);
+	}
+
+
 	
+
+
+	/*
+	 * [메서드 재 정의] : 부모로부터 상속 받은 메서드를 자식 클래스에서 재정의
+	 * 1. "리턴 타입과 메서드 이름(매개변수)"가 부모와 같아야 한다.
+	 *  
+	 * 2. ★★재 정의할 때 접근 제한자는 부모와 같거나 더 넓은 범위로 한다.
+	 *    (그래야 부모의 메서드를 재 정의된 메서드로 덮어 씌워
+	 *    컴파일러가 재 정의된 자식 메서드만 호출할 수 있도록 한다.)
+	 *    public > protected > default > private 
+	 * 
+	 * 3. 예외는 부모 클래스의 메서드보다 많이 선언할 수 없다.  
+	 * 										ex 1) 부모메서드() throws IOException, SQLException
+	 * 							              	    자식메서드() throws IOException(o)
+	 * 											    자식메서드() throws SQLException(o)
+	 * 	    자식 메서드는 부모 메서드의 예외 중 '자식 예외 클래스'는 사용 가능		
+	 * 										ex 2) 부모메서드() throws IOException, SQLException							
+	 * 											    자식메서드() throws SocketException(O) 이유? SocketException(자식) extends IOException(부모)
+	 * 							             	    자식메서드() throws Exception(X) 이유? Exception은 모든 예외의 부모
+	 * 
+	 * 	    재정의 메서드는 재정의된 메서드가 예외를 선언하는지 여부에 관계없이 확인되지 않은 (런타임=실행) 예외를 throws 할 수 있다.
+	 * 							 			 ex 3) 부모메서드() {}
+	 * 								 			       자식메서드() throws IOException
+	 * 											       자식메서드() throws SocketException
+	 * 											       자식메서드() throws NumberFormatException
+	 * 											 =>	오류 유무는 자바 컴파일러에게 맡김
+	 */	
 	
+	//toString() 재정의하는 방법-1 : 우클릭 -> 소스 -> 메서드 대체/구현(=overriding) -> 재정의할 메서드 선택 -> 확인
+	/*
+	@Override // 어노테이션 : 감시자 역할, 재정의할 때 문법적으로 맞는지 확인하여 틀리면 오류 띄움
+	public String toString() throws NumberFormatException{
+		return "책 바코드=" + this.bacode + ", 책 제목=" + bookName + ", 책 저자=" + this.bookAuthor + ", 책 가격=" + BOOKPRICE);;
+	}
+	*/
 	
-	
+	//toString() 재정의하는 방법-2 : 우클릭 -> 소스 -> Generate toString() .. -> 필드 선택 -> 확인
+	@Override
+	public String toString() {// (ex 3) throws NumberFormatException{ : 오류없음  // throws IOException{ : 오류 발생
+		return "Book [bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", bacode=" + bacode + ", 책 가격 =" + BOOKPRICE + "]";
+	}
 }
+
