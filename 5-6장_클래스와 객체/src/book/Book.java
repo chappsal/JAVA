@@ -115,7 +115,7 @@ public class Book {
 	public String bookName;   //책제목
 	private String bookAuthor; //책저자
 	
-	final int bacode; //각 책의 바코드 값을 다르게 설정하고 싶을 때 - 생성자를 통해 최초의 1번만 초기화
+	public final int bacode; //각 책의 바코드 값을 다르게 설정하고 싶을 때 - 생성자를 통해 최초의 1번만 초기화
 	
 	public static final int BOOKPRICE; //책가격
 	
@@ -225,7 +225,7 @@ public class Book {
 	
 	//********* static O *********//
 	//메서드 호출 결과  //메서드생성
-	static int hap(int start, int end){
+	public static int hap(int start, int end){
 		int hap=0;
 		for(int i=start; i<=end; i++) {
 			hap += i;
@@ -234,34 +234,34 @@ public class Book {
 	}
 
 	
-	static int getBookprice() {
+	public static int getBookprice() {
 		return Book.BOOKPRICE; //Book.생략가능
 		// (단, this는 사용불가 => static 메서드는 객체 생성 이전에 이미 메모리에 올라가 있으므로)
 	}
 
 	
 	//********* static X **********
-	String getBookName() {
+	public String getBookName() {
 		return bookName;
 	}
 
 
-	void setBookName(String bookName) {
+	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
 
 
-	String getBookAuthor() {
+	public String getBookAuthor() {
 		return bookAuthor;
 	}
 
-
-	void setBookAuthor(String bookAuthor) {
+	/*
+	public void setBookAuthor(String bookAuthor) {
 		this.bookAuthor = bookAuthor;
 	}
+	*/
 
-
-	int getBacode() {
+	public int getBacode() {
 		return bacode;
 	}
 
@@ -274,7 +274,7 @@ public class Book {
 
 
 	/*
-	 * [메서드 재 정의] : 부모로부터 상속 받은 메서드를 자식 클래스에서 재정의
+	 * [메서드 재 정의] : 부모로부터 상속 받은 메서드를 그대로 사용하지 않고 자식 클래스에서 재정의
 	 * 1. "리턴 타입과 메서드 이름(매개변수)"가 부모와 같아야 한다.
 	 *  
 	 * 2. ★★재 정의할 때 접근 제한자는 부모와 같거나 더 넓은 범위로 한다.
@@ -298,7 +298,10 @@ public class Book {
 	 * 											       자식메서드() throws NumberFormatException
 	 * 											 =>	오류 유무는 자바 컴파일러에게 맡김
 	 */	
-	
+	/* [toString() 재정의하는 이유]  
+	 * Object의 toString() : book.Book@5cc7c2a6(객체 주소로 만든 16진수 해쉬코드) 
+	 * -> Book 클래스에서  Object의 toString() 재정의하여 원하는 값 리턴하기 위해
+	 */
 	//toString() 재정의하는 방법-1 : 우클릭 -> 소스 -> 메서드 대체/구현(=overriding) -> 재정의할 메서드 선택 -> 확인
 	/*
 	@Override // 어노테이션 : 감시자 역할, 재정의할 때 문법적으로 맞는지 확인하여 틀리면 오류 띄움
@@ -312,5 +315,13 @@ public class Book {
 	public String toString() {// (ex 3) throws NumberFormatException{ : 오류없음  // throws IOException{ : 오류 발생
 		return "Book [bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", bacode=" + bacode + ", 책 가격 =" + BOOKPRICE + "]";
 	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 }
-

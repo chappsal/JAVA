@@ -35,7 +35,7 @@ public class BookMain {
 		
 		//private 멤버는 다른 클래스에서 접근 불가 => 접근 가능한 메서드를 통해 간접 접근
 		System.out.println("책 저자: "+ b1.getBookAuthor());
-		b1.setBookAuthor("정혜정");//책 저자를 변경
+		//b1.bookAuthor="정혜정";//책 저자를 변경
 		System.out.println("책 저자-2: "+ b1.getBookAuthor());
 		
 		//멤버 변수의 값 출력-1
@@ -45,7 +45,7 @@ public class BookMain {
 		b1.showBookInfo();
 		
 		//멤버 변수의 값 출력-3 : 객체의 값을 리턴하는 재정의된 toString() 메서드 호출	 
-		//결과바뀜 : Object- book.Book@5cc7c2a6(객체 주소로 만든 16진수 해쉬코드) -> Book - 재정의된 메서드가 돌려주는 값
+		//=> 결과바뀜 : Object의 toString()호출 - book.Book@5cc7c2a6(객체 주소로 만든 16진수 해쉬코드) -> Book 클래스에서  Object의 toString() 재정의 - 재정의된 메서드가 돌려주는 멤버변수 값
 		System.out.println(b1); // 같은 결과
 		System.out.println(b1.toString()); // (같은 결과)
 		
