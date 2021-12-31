@@ -156,10 +156,10 @@ public class Calculator {
 	
 	//실행횟수 출력
 	public void showOperatingTimes(){
-		System.out.println("덧셈 횟수 : " + a.getCntAdd());
-		System.out.println("뺄셈 횟수 : " + s.getCntSub());
-		System.out.println("곱셈 횟수 : " + m.getCntMul());
-		System.out.println("나눗셈 횟수 : " + d.getCntDiv());
+		if(a.getCntAdd()!=0) System.out.println("덧셈 횟수 : " + a.getCntAdd());
+		if(s.getCntSub()!=0) System.out.println("뺄셈 횟수 : " + s.getCntSub());
+		if(m.getCntMul()!=0) System.out.println("곱셈 횟수 : " + m.getCntMul());
+		if(d.getCntDiv()!=0) System.out.println("나눗셈 횟수 : " + d.getCntDiv());
 	}
 	
 	

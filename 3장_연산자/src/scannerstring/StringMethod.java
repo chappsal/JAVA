@@ -1,16 +1,7 @@
-/*
- class종류      ( public static void main~ 여기서
- 
- 1. main( ) 있는 것 : 실행용
- 2. main ( ) 없는 것 : 라이브러리용 ex) java.lang.*                        
- => 3. 실행용+라이브러리용
-
-import는 class앞에 public없으면 같은 패키지 안의 클래스에서만 가능
-                       public있으면 모든 패키지 안의 클래스에서만 가능
-*/
-
-
 package scannerstring;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 import javax.print.DocFlavor.STRING;
 
@@ -22,7 +13,7 @@ public class StringMethod {
 		
 		// String 객체 생성 2가지 방법
 		
-		String str1 = "문자열 상수"; // 1. "문자열 상수"로 객체 생성 -> "공유 상수 풀"에 등록
+		String str1 = "문자열 상수"; // 1. "문자열 상수"로 객체 생성 -> "공유 상수 풀"에 등록(static영역에 있음)
 		String str2 = "문자열 상수"; 
 		String str3 = new String("문자열 상수"); // 2. new 생성자();로 호출하여 객체 생성
 	
@@ -321,8 +312,133 @@ public class StringMethod {
 		substr = "행복, 건강, 소망".substring(4, 5+1); // "건강" 
 		System.out.println(substr);
 	
-	
-	
-	
+		/*
+		 * split(): 문자열 분리. 즉, "구분자"로 문자열을 "여러 부분 문자열"로 분리
+		 */
+		String animals = "dog, cat, rabbit";
+		String[] aniSplit = animals.split(", ");
+		
+		for( String s : aniSplit) { //"dog"
+			System.out.println(s);
+		}
+		
+		//CalculatorMain.java에서 참조 ------------------------------------------
+		String tmp = "  1+2  ";
+		tmp = tmp.trim(); // "1+2"
+		//String[] tmpArr = tmp.split("+"); // "1" "2"
+		
+		String[] tmpArr;
+		double d1; //= Double.parseDouble(tmpArr[0]); // "1" -> 1.0
+		double d2; //= Double.parseDouble(tmpArr[1]); // "2" -> 2.0
+		String opr = null;
+		
+		if(tmp.indexOf("+") != -1) {
+			opr = "+";
+			//tmpArr = tmp.split("+"); => 예외발생(오류) : + , * , ^ 등은 특별한 의미로 사용되기 때문에 구분자로 만들기 위해 \\ 넣어줌
+			tmpArr = tmp.split("\\+");
+			d1 = Double.parseDouble(tmpArr[0]); 
+			d2 = Double.parseDouble(tmpArr[1]);
+		} else if(tmp.indexOf("-") != -1) {
+			opr = "-";
+			tmpArr = tmp.split("-");
+			d1 = Double.parseDouble(tmpArr[0]); 
+			d2 = Double.parseDouble(tmpArr[1]);
+		} else if(tmp.indexOf("*") != -1) {
+			opr = "*";
+			tmpArr = tmp.split("\\*"); 
+			d1 = Double.parseDouble(tmpArr[0]); 
+			d2 = Double.parseDouble(tmpArr[1]);
+		} else if(tmp.indexOf("/") != -1) {
+			opr = "/";
+			tmpArr = tmp.split("/");
+			d1 = Double.parseDouble(tmpArr[0]); 
+			d2 = Double.parseDouble(tmpArr[1]);
+		} else System.out.println("잘못된 연산자");
+		
+		String regex = null;
+		if(opr.equals("+") || opr.equals("*")) regex = "\\" + opr;
+		else regex = opr;
+		tmpArr = tmp.split(regex);
+		d1 = Double.parseDouble(tmpArr[0]); // "1" -> 1.0
+		d2 = Double.parseDouble(tmpArr[1]); // "2" -> 2.0
+		
+		switch(opr) {
+			
+		}
+		
+		
+		
+		//-------------------------------------------------------------------------
+		
+		/* ★★  ... 가변인수 : 여러 매개값들을 "배열"로 처리 (매개변수=인수=argument)
+		 * join( , 가변인수) : 여러 문자열 사이에 "구분자"를 넣어서 하나의 문자열로 결합
+		 * 			static 메서드
+		 * 
+		 */
+		String aniJoin = String.join("#", aniSplit); // "dog" "cat" "rabbit"
+		System.out.println("연결된 하나의 문자열=" + aniJoin); // "dog#cat#rabbit"
+		
+		aniJoin = String.join("#", aniSplit).toUpperCase();
+		System.out.println("연결된 하나의 문자열=" + aniJoin); // 
+		
+		/**************** 테스트 문제 [과제 2]**********************************/ 
+		//당신의 생일은 2001년 06월 22일에 태어난 남성입니다. (split사용해서 출력)
+		String gender;
+		String tmp2;
+		String year;
+		String month;
+		String day;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		while(true) {
+			System.out.print("주민등록번호 입력 (ex. 010622-1234567)(중단:stop)>");
+			
+			//주민등록번호 입력
+			tmp = sc.next(); // 000123-1234567
+			
+			if(tmp.equalsIgnoreCase("stop")) {
+				System.out.println("종료되었습니다.");
+				break;
+			}
+			
+			tmpArr =  tmp.trim().split("-"); // 000123 / 1234567
+			
+			year = tmpArr[0].substring(0, 2); // 00
+			month = tmpArr[0].substring(2, 4); // 01
+			day = tmpArr[0].substring(4, 6); //23
+			
+			// 1,3 남자 / 2,4여자
+			tmp2 = tmpArr[1].substring(0, 1);		
+			switch(tmp2) {
+			case "1": 
+				year = "19" + year;
+				gender = "남성";
+				break;
+			case "3":
+				year = "20" + year;
+				gender = "남성";
+				break;
+			case "2":
+				year = "19" + year;
+				gender = "여성";
+				break;
+			case "4":
+				year = "20" + year;
+				gender = "여성";
+				break;
+			default:
+				System.out.println("다시 입력해주세요.");
+				continue;
+			}
+			System.out.println("당신은 " + year + "년 " + month + "월 " + day + "일에 태어난 " + gender + "입니다.");
+		}
+		
+		
+		
+		
+		
+		
 	}
 }
+
