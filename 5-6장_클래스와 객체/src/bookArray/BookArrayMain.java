@@ -5,7 +5,12 @@ import book.Book;
 public class BookArrayMain {
 
 	public static void main(String[] args) {
+		/*
+		 * 1. 배열을 이용하여 객체 관리
+		 */
+		
 		Book[] library = new Book[3]; // [null,null,null]
+		
 		
 		library[0] = new Book("태백산맥", "조정래", 1);
 		library[1] = new Book("토지", "박경리", 2);

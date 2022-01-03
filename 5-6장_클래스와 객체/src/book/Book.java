@@ -315,6 +315,44 @@ public class Book {
 	public String toString() {// (ex 3) throws NumberFormatException{ : 오류없음  // throws IOException{ : 오류 발생
 		return "Book [bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", bacode=" + bacode + ", 책 가격 =" + BOOKPRICE + "]";
 	}
+	
+	
+	// 우클릭 - 소스 - hashCode() 및 equals() 생성
+	//hashCode() 재정의 : 멤버 변수의 값으로 해쉬 코드 만듦 -> 같은 객체로 취급하여 삭제됨
+	@Override
+	public int hashCode() {
+		final int prime = 31; 
+		int result = 1;
+		result = prime * result + bacode;
+		result = prime * result + ((bookAuthor == null) ? 0 : bookAuthor.hashCode());
+		result = prime * result + ((bookName == null) ? 0 : bookName.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		if (bacode != other.bacode)
+			return false;
+		if (bookAuthor == null) {
+			if (other.bookAuthor != null)
+				return false;
+		} else if (!bookAuthor.equals(other.bookAuthor))
+			return false;
+		if (bookName == null) {
+			if (other.bookName != null)
+				return false;
+		} else if (!bookName.equals(other.bookName))
+			return false;
+		return true;
+	}
 		
 	
 	

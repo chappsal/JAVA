@@ -1,6 +1,5 @@
 package scannerstring;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.print.DocFlavor.STRING;
@@ -332,23 +331,32 @@ public class StringMethod {
 		double d2; //= Double.parseDouble(tmpArr[1]); // "2" -> 2.0
 		String opr = null;
 		
-		if(tmp.indexOf("+") != -1) {
+		/* 문자열 안에 찾고자하는 문자열이 있는지 확인하는 방법 (많이 사용)
+		 * 1. contains("찾는 문자열")  => true / false 리턴
+		 * 
+		 * 2. indexOf("찾는 문자열") != -1
+		 * 		ex) "행복사랑".indexOf("사랑") => 2(찾는 문자열의 시작 index번호 리턴)
+		 */
+		
+		
+		// contains 와 indexOf 둘 다 사용 가능
+		if(tmp.contains("+")) { //if(tmp.indexOf("+") != -1) { 
 			opr = "+";
 			//tmpArr = tmp.split("+"); => 예외발생(오류) : + , * , ^ 등은 특별한 의미로 사용되기 때문에 구분자로 만들기 위해 \\ 넣어줌
 			tmpArr = tmp.split("\\+");
 			d1 = Double.parseDouble(tmpArr[0]); 
 			d2 = Double.parseDouble(tmpArr[1]);
-		} else if(tmp.indexOf("-") != -1) {
+		} else if(tmp.contains("-")) { // } else if(tmp.indexOf("-") != -1) {
 			opr = "-";
 			tmpArr = tmp.split("-");
 			d1 = Double.parseDouble(tmpArr[0]); 
 			d2 = Double.parseDouble(tmpArr[1]);
-		} else if(tmp.indexOf("*") != -1) {
+		} else if(tmp.contains("*")) { // } else if(tmp.indexOf("*") != -1) {
 			opr = "*";
 			tmpArr = tmp.split("\\*"); 
 			d1 = Double.parseDouble(tmpArr[0]); 
 			d2 = Double.parseDouble(tmpArr[1]);
-		} else if(tmp.indexOf("/") != -1) {
+		} else if(tmp.contains("/")) { // } else if(tmp.indexOf("/") != -1) {
 			opr = "/";
 			tmpArr = tmp.split("/");
 			d1 = Double.parseDouble(tmpArr[0]); 
@@ -381,32 +389,45 @@ public class StringMethod {
 		aniJoin = String.join("#", aniSplit).toUpperCase();
 		System.out.println("연결된 하나의 문자열=" + aniJoin); // 
 		
-		/**************** 테스트 문제 [과제 2]**********************************/ 
-		//당신의 생일은 2001년 06월 22일에 태어난 남성입니다. (split사용해서 출력)
+		/**************** 테스트 문제 [과제 2] (Gender.java 참고)**********************************/ 
+		//당신의 생일은 2001년 06월 22일에 태어난 남성입니다. (split 사용해서 출력)
+		
 		String gender;
 		String tmp2;
+
 		String year;
 		String month;
 		String day;
 		
 		Scanner sc = new Scanner(System.in);
 		
-		while(true) {
+		boolean flag = true;
+		while(flag) {
 			System.out.print("주민등록번호 입력 (ex. 010622-1234567)(중단:stop)>");
 			
 			//주민등록번호 입력
 			tmp = sc.next(); // 000123-1234567
 			
 			if(tmp.equalsIgnoreCase("stop")) {
-				System.out.println("종료되었습니다.");
+				flag = false;
 				break;
 			}
 			
-			tmpArr =  tmp.trim().split("-"); // 000123 / 1234567
+			if(!(tmp.contains("-") && tmp.length()==14)) { // 문자열 안에 속해있는지 확인하는 메서드, boolean 타입
+				System.out.println("다시 입력해주세요.");
+				continue;
+			}
 			
-			year = tmpArr[0].substring(0, 2); // 00
-			month = tmpArr[0].substring(2, 4); // 01
-			day = tmpArr[0].substring(4, 6); //23
+			tmpArr =  tmp.trim().split("-"); // 0:000123 / 1:1234567
+			
+			if(tmpArr[0].length() != 6 || tmpArr[1].length() != 6) {
+				System.out.println("다시 입력해주세요.");
+				continue;
+			}
+			
+			year = tmpArr[0].substring(0, 1+1); // 00
+			month = tmpArr[0].substring(2, 3+1); // 01
+			day = tmpArr[0].substring(4, 5+1); //23
 			
 			// 1,3 남자 / 2,4여자
 			tmp2 = tmpArr[1].substring(0, 1);		
@@ -430,9 +451,41 @@ public class StringMethod {
 			default:
 				System.out.println("다시 입력해주세요.");
 				continue;
-			}
+			} // switch
+		
+			
+			/* switch문 대신 if문 사용
+			 
+			 if(tmpArr[1].charAt(0) == '1' || tmpArr[1].charAt(0) == '2') {
+			 	gender = "남성";
+			 	
+			 	if(tmpArr[1].charAt(0) == '1') {
+			 		year = "19" + year; 
+			 	} else {
+			 		year = "20" + year;
+			 	}
+			 	
+			 } else if(tmpArr[1].charAt(0) == '2' || tmpArr[1].charAt(0) == '4') {
+				 gender = "여성";
+				 
+				 if(tmpArr[1].charAt(0) == '2') {
+					 	year = "19" + year;
+				 	} else {
+				 		year = "20" + year;
+				 	}
+			 }
+			 
+			 */
+			
 			System.out.println("당신은 " + year + "년 " + month + "월 " + day + "일에 태어난 " + gender + "입니다.");
-		}
+			
+		} // while문
+		System.out.println("종료되었습니다.");
+
+		
+		
+		
+		
 		
 		
 		
@@ -441,4 +494,5 @@ public class StringMethod {
 		
 	}
 }
+
 

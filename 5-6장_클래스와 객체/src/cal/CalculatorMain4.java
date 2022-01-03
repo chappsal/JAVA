@@ -6,10 +6,15 @@ public class CalculatorMain4 {
 
 	public static void main(String[] args) {
 		
+		//[과제 1]
+
 		// 계산기 생성
 		Calculator cal = new Calculator();
 		
 		Scanner sc = new Scanner(System.in);
+
+		String[] tmpArr;
+		String opr = null;
 
 		int totalCnt = 0;
 		boolean flag = true;
@@ -25,8 +30,6 @@ public class CalculatorMain4 {
 				break;
 			}
 			
-			String[] tmpArr;
-			String opr = null;
 			
 			if(tmp.indexOf("+") != -1) {
 				opr = "+";
@@ -78,4 +81,3 @@ public class CalculatorMain4 {
 	}//main
 
 }
-
