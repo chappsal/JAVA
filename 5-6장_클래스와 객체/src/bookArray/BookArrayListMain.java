@@ -63,7 +63,7 @@ public class BookArrayListMain {
 		else System.out.println("찾았는데 없어서 삭제못함"); // "찾아서 삭제함" : Book 클래스에 hashCode(), equals() 메서드 멤버 변수의 값으로 재정의
 
 		
-		if(library.remove("홍길동 이야기")) // library는 Book객체만 다룸, "홍길동 이야기"는 String 객체
+		if(library.remove(new Integer(1))) // library는 Book객체만 다룸, "홍길동 이야기"는 String 객체
 			System.out.println("찾아서 삭제함");
 		else System.out.println("찾았는데 없어서 삭제못함"); // "찾았는데 없어서 삭제못함"
 		System.out.println();
@@ -131,11 +131,19 @@ public class BookArrayListMain {
 		
 		/*
 		String은 new로 생성하는 법, 문자열 객체로 생성하는 법 두가지가 있음
-		new 는 다른 주소로 생성됨
+		new 는 같은 값이어도 다른 주소로 생성됨
 		재정의해서
 		같은 해쉬코드 값을 equals로 찾음
 		new를 이용하지 않으면 
 		new는 새로운 객체를 만들고 아닌건 기존의 객체를 참조하는것 암튼 해쉬코드 어쩌고로 해야 삭제 가능함
+		----------------------------------------------------------------
+		주소로 해쉬코드를 만들면 다른 값으로 인식
+		값으로 해쉬코드를 만들면 같은 값으로 인식
+		
+		멤버변수의 값으로 만든 해쉬코드가 같음(값은 다름)
+		equals는 진짜 멤버변수의 값이 같은지 비교
+		
+		그래서 해쉬코드랑 이퀄스 둘 다 있어야 함 // Book.java 에 만들은 재정의 메서드
 		*/
 		System.out.println("------------------Integer------------------------");
 		

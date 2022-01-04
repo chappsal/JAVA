@@ -20,37 +20,56 @@ public class CalculatorMain4 {
 		boolean flag = true;
 		
 		while(flag) {
+			
+			String regex;
+			double d1, d2;
+			
+			
 			System.out.println("계산식(1+1, 1*1..)을 입력해주세요.(종료:stop)");//  " 1+2 " 
 			
-			String tmp = sc.next(); 
-			tmp = tmp.trim();
+			String tmp = sc.nextLine().trim(); 
 			
 			if(tmp.equalsIgnoreCase("stop")) {
 				flag = false;
 				break;
 			}
 			
+			/* 문자열 안에 찾고자하는 문자열이 있는지 확인하는 방법 (많이 사용) / 정리 StringMethod.java에
+			 * 1. contains("찾는 문자열")  => true / false 리턴
+			 * 
+			 * 2. indexOf("찾는 문자열") != -1
+			 * 		ex) "행복사랑".indexOf("사랑") => 2(찾는 문자열의 시작 index번호 리턴)
+			 */
 			
-			if(tmp.indexOf("+") != -1) {
+			if(tmp.contains("+")) {
 				opr = "+";
-			} else if(tmp.indexOf("-") != -1) {
+			} else if(tmp.contains("-")) {
 				opr = "-";
-			} else if(tmp.indexOf("*") != -1) {
+			} else if(tmp.contains("*")) {
 				opr = "*";
-			} else if(tmp.indexOf("/") != -1) {
+			} else if(tmp.contains("/")) {
 				opr = "/";
 			} else System.out.println("잘못된 연산자");
 			
-			String regex = null;
-			if(opr.equals("+") || opr.equals("*")) {
-				regex = "\\" + opr;
+			
+			try {
+				regex = null;
+				
+				if(opr.equals("+") || opr.equals("*")) {
+					regex = "\\" + opr;
+				}
+				else {regex = opr;}
+				
+				tmpArr = tmp.split(regex);
+				d1 = Double.parseDouble(tmpArr[0]);
+				d2 = Double.parseDouble(tmpArr[1]); 
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("다시 입력해주세요");
+				sc.nextLine();
+				continue;				
 			}
-			else {
-				regex = opr;
-			}
-			tmpArr = tmp.split(regex);
-			double d1 = Double.parseDouble(tmpArr[0]); // "1" -> 1.0
-			double d2 = Double.parseDouble(tmpArr[1]); // "2" -> 2.0
 			
 			switch(opr) {
 			case "+":
@@ -70,9 +89,6 @@ public class CalculatorMain4 {
 				break;
 				
 			}
-			
-			
-			
 		}
 
 		cal.showOperatingTimes();
