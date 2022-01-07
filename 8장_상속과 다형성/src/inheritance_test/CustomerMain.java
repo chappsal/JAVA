@@ -1,4 +1,4 @@
-package inheritance;
+package inheritance_test;
 
 public class CustomerMain {
 

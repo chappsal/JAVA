@@ -93,7 +93,7 @@ public class Customer { //고객  : 부모
 	/*** get~():값을 얻을 때, set~(매개변수):값을 변경할 때 ***/
 	//final 붙이면 재정의 불가
 	
-	public final int getCustomerID() {
+	public final int getCustomerID() { //매개변수가 없는 생성자가 있기 때문에  get,set메서드 만듦
 		return customerID;
 	}
 
