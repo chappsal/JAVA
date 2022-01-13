@@ -1,4 +1,4 @@
-package a_project_interface;
+package a_project_interface2;
 
 import java.util.Scanner;
 

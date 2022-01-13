@@ -1,4 +1,4 @@
-package a_project_interface;
+package a_project_interface2;
 /*
  * 인터페이스 : 클라이언트 프로그램에 '어떤 메서드를 제공하는지' 미리 알려주는 명세 또는 약속
  */
