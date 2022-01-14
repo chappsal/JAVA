@@ -161,21 +161,23 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		System.out.print("주민등록번호를 입력하세요 > ");
 		String serialNumber = MenuViewer.sc.next(); //지역변수
 
+		MenuViewer.sc.nextLine();
+		
 		System.out.print("전화번호를 입력하세요 (없으면 엔터)> ");
-		String phoneNumber = MenuViewer.sc.nextLine(); MenuViewer.sc.nextLine();   //지역변수
+		String phoneNumber = MenuViewer.sc.nextLine();    //지역변수
 		
 		System.out.print("주소를 입력하세요 (없으면 엔터)> ");
 		String address = MenuViewer.sc.nextLine();//지역변수
 
-		if(phoneNumber.equals("") && address.equals("")) {
+		if(phoneNumber.trim().equals("") && address.trim().equals("")) {
 			p[i++] = new Person(name, serialNumber);
-		} else if(!phoneNumber.equals("") && address.equals("")) {
+		} else if(!phoneNumber.trim().equals("") && address.trim().equals("")) {
 			//Person2 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person2(name, serialNumber, phoneNumber);
-		} else if(phoneNumber.equals("") && !address.equals("")) {
+		} else if(phoneNumber.trim().equals("") && !address.trim().equals("")) {
 			//Person3 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person3(name, serialNumber, phoneNumber);
-		} else if(!phoneNumber.equals("") && !address.equals("")) {
+		} else if(!phoneNumber.trim().equals("") && !address.trim().equals("")) {
 			//Person4 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person4(name, serialNumber, phoneNumber, address);
 		}
@@ -236,6 +238,11 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 	
 	
 }
+
+
+
+
+
 
 
 

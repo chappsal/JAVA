@@ -1,4 +1,4 @@
-package a_project_interface2;
+package a_project_interface3;
 /*
  * 인터페이스 : 클라이언트 프로그램에 '어떤 메서드를 제공하는지' 미리 알려주는 명세 또는 약속
  */
@@ -64,7 +64,7 @@ package a_project_interface2;
  * '인터페이스'에 담아서 의뢰
  */
 public interface P {
-	int INPUT = 1, SEARCH = 2, DELETE = 3, EXIT = 4;
+	int INPUT = 1, SEARCH = 2, EXIT = 3;
 	
 	//1. 이름, 주민등록번호, 전화번호 저장
 	void input() throws PersonSizeException;
@@ -72,10 +72,6 @@ public interface P {
 	
 	//2. 주민등록번호를 기반으로 고객의 이름과 전화번호를 검색
 	void search();
-	
-	//3. 주민등록번호를 기반으로 고객 삭제
-	void delete();
-	
 	
 	/**문법설명***************************************************/
 	

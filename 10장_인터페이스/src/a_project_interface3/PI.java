@@ -1,4 +1,4 @@
-package a_project_interface;
+package a_project_interface3;
 
 import java.util.Scanner;
 
@@ -161,22 +161,23 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		System.out.print("주민등록번호를 입력하세요 > ");
 		String serialNumber = MenuViewer.sc.next(); //지역변수
 
-		System.out.print("전화번호를 입력하세요 (없으면 0 입력)> ");
-		String phoneNumber = MenuViewer.sc.next(); //지역변수
+		MenuViewer.sc.nextLine();
 		
-		System.out.print("주소를 입력하세요 (없으면 '없음' 입력)> ");
-		String address = MenuViewer.sc.next(); //지역변수
+		System.out.print("전화번호를 입력하세요 (없으면 엔터)> ");
+		String phoneNumber = MenuViewer.sc.nextLine();    //지역변수
+		
+		System.out.print("주소를 입력하세요 (없으면 엔터)> ");
+		String address = MenuViewer.sc.nextLine();//지역변수
 
-		//입력받은 값들로 고객 개체 생성 => 배열 저장
-		if(phoneNumber.equals("0") && address.equals("없음")) {
+		if(phoneNumber.trim().equals("") && address.trim().equals("")) {
 			p[i++] = new Person(name, serialNumber);
-		} else if(!phoneNumber.equals("0") && address.equals("없음")) {
+		} else if(!phoneNumber.trim().equals("") && address.trim().equals("")) {
 			//Person2 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person2(name, serialNumber, phoneNumber);
-		} else if(phoneNumber.equals("0") && !address.equals("없음")) {
+		} else if(phoneNumber.trim().equals("") && !address.trim().equals("")) {
 			//Person3 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person3(name, serialNumber, phoneNumber);
-		} else if(!phoneNumber.equals("0") && !address.equals("없음")) {
+		} else if(!phoneNumber.trim().equals("") && !address.trim().equals("")) {
 			//Person4 객체 -> Person 타입으로 자동 형 변환되어 저장
 			p[i++] = new Person4(name, serialNumber, phoneNumber, address);
 		}
@@ -208,11 +209,12 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 			if(serialNumber.equals(person.getSerialNumber())) {
 				personInfo += "고객의 이름: " + person.getName();
 			
-			
 				if(person instanceof Person3) {
 					personInfo += ", 주소: " + ((Person3) person).getAddress();
 				} else if (person instanceof Person2) {
 					personInfo += ", 전화번호: " +((Person2) person).getPhoneNumber();
+				} else if(person instanceof Person4) {
+					personInfo += ", 전화번호: " + ((Person4) person).getPhoneNumber() + ", 주소: " + ((Person4) person).getAddress();
 				}
 				
 				return personInfo; //return 만나면 메서드 종료되어 더 이상 반복문 실행 안 함
@@ -236,17 +238,6 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
