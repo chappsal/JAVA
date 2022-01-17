@@ -1,6 +1,5 @@
-package a_project_interface3;
+package a_project_interface3_delete2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -25,7 +24,6 @@ import java.util.Scanner;
 class Person {//이름과 주민번호를 가진 고객 클래스
 	private String name;		//이름 - private 고객 정보는 보안
 	private String serialNumber;//주민번호
-	
 	
 	//생성자가 있으면 컴파일러가 컴파일 전에 기본생성자 삽입 안 함 
 	//Person(){} // 기본생성자가 있어야 Person2에서 생성자를 만들지 않아도 오류 나지 않음
@@ -164,6 +162,26 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		System.out.print("주민등록번호를 입력하세요 > ");
 		String serialNumber = MenuViewer.sc.next(); //지역변수
 
+		//방법1 : 1번만 더 주민 입력 가능
+		for(Person person:p) {
+			if(person.equals(serialNumber)) {
+				System.out.println("중복된 주민등록번호가 있습니다. 다시 입력해주세요 > ");
+				serialNumber = MenuViewer.sc.nextLine().trim();
+				break;
+			}
+		}
+		
+		//방법2 : 여러번 입력 가능
+		for(int index = 0; index < i; index++) {  // 중복된 주민등록번호가 있는지 확인
+			
+			while(serialNumber.equals(p[index].getSerialNumber())) {
+				
+				System.out.print("★ 중복된 주민등록 번호입니다. 다시 입력하세요 > ");
+				serialNumber = MenuViewer.sc.next().trim();
+				index = 0;
+			}
+		}
+		
 		MenuViewer.sc.nextLine();
 		
 		System.out.print("전화번호를 입력하세요 (없으면 엔터)> ");
@@ -206,7 +224,6 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 	//메서드 오버로딩 : 메서드 명은 같아도 된다. 단, 매개변수의 수나 타입은 달라야 함
 	//주민등록번호를 매개 값으로 받아 그 객체(고객)의 정보(위치) 리턴
 	private String search(String serialNumber) { //사용자가 입력한 주민번호 //홍대표에게 의뢰받은 것이 아닌 우리가 만든 것 => 보이지 않게 private
-		
 		for(Person person:p) { //person : 배열에 저장된 각 주소가 들어있음
 			String personInfo = "";
 			
@@ -228,19 +245,53 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		return null; // 반복문을 끝나도록 같은 주민번호를 찾지 못 함
 	}
 
-
+	
 	@Override
 	public void delete() {
-		System.out.println("삭제할 고객의 주민등록번호 입력 >");
+		showAllPersonInfo(); // 배열에 저장된 모든 고객 정보 출력
+		System.out.print("삭제할 고객님의 주민등록번호를 입력해주세요.>");
 		String serialNumber = MenuViewer.sc.next();
+		int personInfoIdx = delete(serialNumber);
 		
-		ArrayList<Person> pList = new ArrayList<Person>(Arrays.asList(p));
+		if(personInfoIdx == -1) {
+			System.out.println("고객의 정보를 찾을 수 없습니다.");
+		} else {
+			System.out.println("삭제할 고객 정보: "+ p[personInfoIdx].toString());
+			for(int currentIndex = personInfoIdx; currentIndex < i-1; currentIndex++) {
+				p[currentIndex] = p[currentIndex +1];
+			}
+			i--;
+			System.out.println("삭제되었습니다.");
+		}
+		
 		
 	
 		
 	}
 	
+	
+	//입력받은 주민번호와 같은 주민번호를 가진 Person 객체의 index번호(=위치) 리턴
+	private int delete(String serialNumber) {
+		for(int index=0; index < i; i++) {
+			if(serialNumber.equals(p[index].getSerialNumber()))
+				return index; // 찾으면 해당 index 번호 리턴
+		}
+		return -1; //못찾으면 -1 리턴
+	}
 
+
+
+
+	private void showAllPersonInfo() {
+		System.out.println("**************** [고객 정보 출력] ******************");
+		//System.out.println(Arrays.toString(p)); //삭제된 정보도 함께 출력되므로 사용x
+		
+		for(Person person:p) {
+			System.out.println(person);
+		}
+		System.out.println("***********************************************");	
+	}
+	
 	
 	
 	/**문법설명*********************************************************************************/
@@ -252,7 +303,6 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		System.out.println("**************** [고객 정보 출력] ******************");
 		
 	}
-
 
 
 

@@ -1,4 +1,4 @@
-package a_project_interface3;
+package a_project_interface3_delete2;
 
 import java.util.Scanner;
 

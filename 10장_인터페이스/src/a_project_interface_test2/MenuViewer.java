@@ -1,4 +1,4 @@
-package a_project_interface3;
+package a_project_interface_test2;
 
 import java.util.Scanner;
 
@@ -11,8 +11,7 @@ public class MenuViewer {
 		System.out.println("선택하세요...");
 		System.out.println("1. 고객 데이터 [입력]");
 		System.out.println("2. 주민번호로 이름과 전화번호 또는 주소 [검색]");
-		System.out.println("3. 주민번호로 고객 데이터 [삭제]");
-		System.out.println("4. 프로그램 [종료]");
-		System.out.println("선택 > ");
+		System.out.println("3. 프로그램 [종료]");
+		System.out.print("선택 > ");
 	}
 }

@@ -1,6 +1,5 @@
-package a_project_interface3;
+package a_project_interface3_delete;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -25,7 +24,6 @@ import java.util.Scanner;
 class Person {//이름과 주민번호를 가진 고객 클래스
 	private String name;		//이름 - private 고객 정보는 보안
 	private String serialNumber;//주민번호
-	
 	
 	//생성자가 있으면 컴파일러가 컴파일 전에 기본생성자 삽입 안 함 
 	//Person(){} // 기본생성자가 있어야 Person2에서 생성자를 만들지 않아도 오류 나지 않음
@@ -206,7 +204,6 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 	//메서드 오버로딩 : 메서드 명은 같아도 된다. 단, 매개변수의 수나 타입은 달라야 함
 	//주민등록번호를 매개 값으로 받아 그 객체(고객)의 정보(위치) 리턴
 	private String search(String serialNumber) { //사용자가 입력한 주민번호 //홍대표에게 의뢰받은 것이 아닌 우리가 만든 것 => 보이지 않게 private
-		
 		for(Person person:p) { //person : 배열에 저장된 각 주소가 들어있음
 			String personInfo = "";
 			
@@ -228,19 +225,57 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		return null; // 반복문을 끝나도록 같은 주민번호를 찾지 못 함
 	}
 
-
+	
 	@Override
 	public void delete() {
-		System.out.println("삭제할 고객의 주민등록번호 입력 >");
+		System.out.print("삭제할 고객님의 주민등록번호를 입력해주세요.>");
 		String serialNumber = MenuViewer.sc.next();
 		
-		ArrayList<Person> pList = new ArrayList<Person>(Arrays.asList(p));
+		/* 방법 1
+		for(int index = 0; index < p.length; index++) { // p.length를 i로 바꿔도 됨 / i : 저장할 위치 index or 저장된 객체 수
+			if(p[index] == null) {
+				break;
+			}
+						
+			
+			if(serialNumber.equals(p[index].getSerialNumber())) {
+				for(int currentIndex = index; currentIndex < p.length; currentIndex++) {
+					if( currentIndex + 1 == p.length || p[currentIndex + 1] == null ) {
+						p[currentIndex] = null;
+						i--; // index번호감소
+						System.out.println("[삭제완료!!!]");
+						System.out.println(Arrays.toString(p));
+						return;
+					}
+					p[currentIndex] = p[currentIndex + 1];
+					System.out.println("[삭제 중...]");
+					System.out.println(Arrays.toString(p));
+				}
+			}
+		}
+		*/
 		
-	
+		//방법2
+		
+		for(int index = 0; index < i; index++) {
+			if(serialNumber.equals(p[index].getSerialNumber())) {
+				//currentIndex= 1 2
+				for(int currentIndex = index; currentIndex < i-1; currentIndex++) {
+					p[currentIndex] = p[currentIndex + 1];
+					//p[1] = p[2] , p[2]=p[3]
+				}
+				i--;
+				System.out.println("삭제되었습니다");
+				return; //delete() 종료
+			}
+			System.out.println(p[index].toString());
+		}
+		
+		System.out.println("삭제할 고객님의 정보가 없습니다.");
 		
 	}
 	
-
+	
 	
 	
 	/**문법설명*********************************************************************************/
@@ -252,7 +287,6 @@ public class PI implements P { //PI : 고객 클래스를 관리하는 '매니�
 		System.out.println("**************** [고객 정보 출력] ******************");
 		
 	}
-
 
 
 
