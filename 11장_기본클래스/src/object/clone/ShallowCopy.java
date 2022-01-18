@@ -24,7 +24,7 @@
  * 
  */
 
-package clone;
+package object.clone;
 
 
 class Point implements Cloneable{ //점   // 1.객체를 복제할 수 있는 클래스
@@ -87,11 +87,21 @@ class Rectangle implements Cloneable { //사각형
 	}
 
 	
+	//★★오버라이딩(=재정의)할 때 부모 메서드 반환 타입을 자손 클래스 타입으로 변경 허용
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	protected Rectangle clone() throws CloneNotSupportedException {
+		return (Rectangle)super.clone();
 	}
 	
+	/*
+	//★★오버라이딩(=재정의)할 때 부모 메서드 반환 타입을 자손 클래스 타입으로 변경 허용
+	
+	@Override
+	protected Point clone() throws CloneNotSupportedException { 
+		return (Point)super.clone(); //Object의 clone() 메서드 : 얕은 복제 					
+	}
+	 
+	 */
 	
 }
 
@@ -100,37 +110,72 @@ class Rectangle implements Cloneable { //사각형
 public class ShallowCopy {
 
 	public static void main(String[] args) {
-		Rectangle org = new Rectangle(1, 1, 9, 9);
-		System.out.println("[원본 객체]");
-		org.showPosition();
+		System.out.println("-----Point 얕은 복사-----");
+		Point p = new Point(1, 1);
+		System.out.println("[원본 Point]");
+		p.showPosition();
 
+		System.out.println();
+		Point pointCpy;
 		
 		try {
-			if(org instanceof Rectangle) {
-
-				Rectangle cpy = (Rectangle) org.clone();
-				System.out.println("[복사 객체]");
-
-				cpy.showPosition();
+			if(p instanceof Point) {
+				pointCpy = (Point)p.clone();
+				System.out.println("[복사 Point]");
+				pointCpy.showPosition();
 				
-				System.out.println("---[원본 객체 정보 변경]---");
+				System.out.println();
+				System.out.println("---[원본 Point 정보 변경]---");
+				p.changePosition(3, 3);
+				
+				System.out.println();
+				System.out.println("[변경 후 원본 Point]");
+				p.showPosition();
+				
+				System.out.println();
+				System.out.println("[변경 후 복제 Point]");
+				pointCpy.showPosition();
+			}
+		} catch (CloneNotSupportedException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		System.out.println();
+		System.out.println("-----Rectangle 얕은 복사-----");
+		Rectangle org = new Rectangle(1, 1, 9, 9);
+		System.out.println("[원본 직사각형]");
+		org.showPosition();
+
+		Rectangle cpy;
+		
+		try {
+			//if(org instanceof Rectangle) {
+
+				//cpy = (Rectangle) org.clone();
+				cpy = org.clone();
+				System.out.println("[복사 직사각형]");
+				cpy.showPosition();
+
+				
+				System.out.println("---[원본 직사각형 정보 변경]---");
 				org.changePosition(2, 2, 7, 7); // org 포지션 변경
 				
-				System.out.println("[원본 객체]");	
+				System.out.println("[원본 직사각형]");	
 				org.showPosition();    			
 
-				System.out.println("[복사 객체]");	
+				System.out.println("[복사 직사각형]");	
 				cpy.showPosition();    			// 원본을 변경했는데 복사까지 변경됨
 				
-				System.out.println("---[복사 객체 정보 변경]---");
+				System.out.println("---[복사 직사각형 정보 변경]---");
 				org.changePosition(3, 3, 10, 10); // org 포지션 변경
 				
-				System.out.println("[원본 객체]");	
+				System.out.println("[원본 직사각형]");	
 				org.showPosition();    			
 				
-				System.out.println("[복사 객체]");	
+				System.out.println("[복사 직사각형]");	
 				cpy.showPosition();    			// 복사를 변경했는데 원본까지 변경됨
-			}
+			//}
 		} catch (CloneNotSupportedException e) {
 			//e.printStackTrace(); //예외 클래스 이름+메세지+경로.. 지저분함
 			//System.out.println(e); //예외 클래스 이름 + 예외 메세지
@@ -142,9 +187,6 @@ public class ShallowCopy {
 	}
 
 }
-
-
-
 
 
 
