@@ -10,7 +10,7 @@
  *   -Stringbuilder : 싱글 스레드에서 사용 => 속도 향상
  *   -StringBuffer  : 멀티 스레드에서 사용 => 동기화 보장 (앞에 synchronized가 붙어있는걸 제외하면 StringBuilder와 같음 A와 B가 동시에 add()를 사용할때 
  *   											A가 사용하다 시간이 끝나 B의 차례가 되면 그대로 lock해서 B가 사용 못 함
- *   											시간이 지나 다시 A차례가 오고 사용이 끝나면 unlock되어서 B가 사용할 수 있음. 효율은 떨어지지만(메모리 낭비) 동기화 보장)
+ *   											시간이 지나 다시 A차례가 오고 사용이 끝나면 unlock되어서 B가 사용할 수 있음. 효율은 떨어지지만 동기화 보장)
  */
 
 package stringbuilder;
