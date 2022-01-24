@@ -5,15 +5,15 @@
    				이들을 총칭해서 '프레임워크'라고 부름
    				(반드시 객체만 관리)
    
-   					'Collection' 인터페이스
-   						  |
-   		 	|--------------------------|
-   		List 인터페이스				  Set 인터페이스					Map 인터페이스 
-   	  	 	|						   |
-      배열과 유사하여 index로 관리			  index로 관리 x
-    -> 순서를 유지하면서 저장			-> 순서없이 저장
-   	         중복 저장 가능				   중복 저장 불가(집합)
- 			|						   |
+   					'Collection' 인터페이스  							Map 인터페이스
+   						  |												 |
+   		 	|--------------------------|						키와 값의 쌍(=엔트리)으로 저장
+   		List 인터페이스				  Set 인터페이스					  키: 중복 x , 값: 중복 o 
+   	  	 	|						   |								 |	 
+      배열과 유사하여 index로 관리			  index로 관리 x						클래스
+    -> 순서를 유지하면서 저장			-> 순서없이 저장							 |
+   	         중복 저장 가능				   중복 저장 불가(집합)					  HashMap
+ 			|						   |							  TreeMap
  		     클래스						   클래스
   		ArrayList					HashSet
   		Vector						TreeSet
@@ -105,7 +105,7 @@ public class ArrayListExample {
 		System.out.println();
 		
 		
-		System.out.println("-- 삭제-1 (index 사용)--"); //Set계통에 없음 (index 없음)
+		System.out.println("-- 삭제-1 (index 이용)--"); //Set계통에 없음 (index 없음)
 		System.out.println("index 1에 저장된 삭제한 문자열 : " + list.remove(1));
 		System.out.println();
 		for(i=0; i<list.size(); i++) { //size는 length보다 효율적 
@@ -114,7 +114,7 @@ public class ArrayListExample {
 		System.out.println();
 		
 		
-		System.out.println("-- 삭제-2 (Object 사용 : 객체)--");	// index를 사용하지 않으므로 Set계통에서 사용
+		System.out.println("-- 삭제-2 (Object 이용 : 객체)--");	// index를 사용하지 않으므로 Set계통에서 사용
 		if(list.remove("정말~")) System.out.println("찾아서 있으면 삭제 후 true -> 삭제됨");
 		else System.out.println("찾아서 없으면 false -> 삭제 안 됨");
 		
