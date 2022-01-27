@@ -14,12 +14,12 @@
  *  
  */
 
-package set.treesetmember;
+package set.treesetmember2;
 
 import java.util.Comparator;
 
 // 사용자 정의 클래스
-public class Member implements Comparable<Member>, Comparator<Member> { 
+public class Member2 implements Comparable<Member2> { 
 	// 1. private 멤버변수
 	private int memberId; // 회원 아이디
 	private String memberName; // 회원 이름
@@ -28,23 +28,12 @@ public class Member implements Comparable<Member>, Comparator<Member> {
 	// 2. 생성자
 	//public Member() {} // 생성자 하나도 안 만들면 자동으로 생성
 	
-	public Member(int memberId, String memberName) {
+	public Member2(int memberId, String memberName) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
 	}
 
-	/*-------------------------------------------------------------*/
-	
-
-	// ※ Comparator 사용 시 유의점 : TreeSet 생성자에 'Comparator를 구현한 객체'를 매개변수로 전달해야 함
-	// 생성자 직접 추가 (why? TreeSet 생성자 호출할 때 'Comparator를 구현한 객체'를 매개값으로 주기위해)
-	public Member() {
-		//super();
-	}
-
-	/*-------------------------------------------------------------*/
-	
 
 	//public get~ , set~ 메서드를 통해 private 멤버변수에 접근
 	public int getMemberId() {
@@ -62,7 +51,7 @@ public class Member implements Comparable<Member>, Comparator<Member> {
 
 	//memberId로 오름차순 정렬
 	@Override 
-	public int compareTo(Member o) {	
+	public int compareTo(Member2 o) {	
 		//오름차순 정렬 방법-1 : 권장하지 않음 (오버플로우, 언더플로우 발생 가능성)
 		//return this.memberId - o.memberId; // 새로 추가되는 값 - 기존의 비교하는 값 = 반환값 양수 : 오름차순
 										   //								  0 : 중복되어 add()안 됨 
@@ -89,25 +78,6 @@ public class Member implements Comparable<Member>, Comparator<Member> {
 	}
 
 
-	/*-------------------------------------------------------------*/
-	
-	//memberId로 내림차순 정렬
-	@Override
-	public int compare(Member o1, Member o2) {
-		//내림차순 정렬 방법-1 : 권장하지 않음 (오버플로우, 언더플로우 발생 가능성)
-		//return (o1.memberId - o2.memberId)*(-1); //새로 추가되는 값 - 기존의 비교하는 값 : 내림차순 
-		
-		//내림차순 정렬 방법-2
-		//if(o1.memberId < o2.memberId) return -1;// 새로 추가되는 값 - 기존의 비교하는 값 < 0 => 대표값 1 리턴
-		//else if(o1.memberId == o2.memberId) return 0; // 새로 추가되는 값 - 기존의 비교하는 값  == 0 리턴
-		//else return 1;// 새로 추가되는 값 - 기존의 비교하는 값 > 0 => -1리턴
-		
-		//내림차순 정렬 방법-3
-		return o1.compareTo(o2) * (-1);
-	}
-	
-	/*-------------------------------------------------------------*/
-	
 	
 	
 	

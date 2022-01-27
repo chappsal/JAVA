@@ -58,6 +58,10 @@ public class HashSetExample {
 		System.out.println("총 객체 수 : " + set.size());
 		System.out.println();
 		
+		System.out.println("** hashSet 객체의 주소만  **"); //추가된 순서대로 출력
+		System.out.println(set); //set.toString() 호출 -> 저장된 각 개체의 toString() 호출
+		System.out.println();
+		
 		if(set.contains("모두")) {//주어진 객체가 포함되어 있으면 true, 없으면 false
 			System.out.println("\"모두\"가 존재한다.");
 		} else System.out.println("\"모두\"가 존재하지 않는다.");
@@ -119,5 +123,6 @@ public class HashSetExample {
 	}
 
 }
+
 
 
