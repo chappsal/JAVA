@@ -1,3 +1,12 @@
+/*
+ * Map 인터페이스
+ * 1. 키와 값으로 구성된 Map.Entry 객체를 저장
+ * 2. 키와 값은 모두 객체
+ * 3. 키 : 중복 x, 값 : 중복 o
+ * 4. 기존에 저장된 key와 동일한 값으로 저장하면 기존의 값은 없어지고 새로운 값으로 대체됨
+ */
+
+
 package map;
 
 
@@ -20,7 +29,7 @@ public class HashMapExample {
 		System.out.println("저장된 총 객체수 : " + map.size()); //3
 		
 		
-		//만약 기존에 저장된 key와 동일한 값으로 저장하면 기존의 값은 없어지고 새로운 값으로 대체됨
+		//기존에 저장된 key와 동일한 값으로 저장하면 기존의 값은 없어지고 새로운 값으로 대체됨
 		map.put(6, "유관순");
 		System.out.println("저장된 총 객체수 : " + map.size()); //3
 		System.out.println("6의 이름 : " + map.get(6)); //int -> 자동 Boxing되어 'Integer객체' -> Object객체 
@@ -37,7 +46,7 @@ public class HashMapExample {
 		/*----------------keySet() : 향상된 for문, 반복자----------------------------------------------------*/
 		
 		
-		//keySet()로 모든 키 얻어 Set 객체로 담기
+		//keySet()메서드로 모든 키 얻어 Set 객체로 담기
 		Set<Integer> kset = map.keySet(); // 6,3,7
 		
 		System.out.println("방법 1 : keySet() -> 향상된 for문");
@@ -58,7 +67,7 @@ public class HashMapExample {
 		/*----------------entrySet() : 향상된 for문, 반복자----------------------------------------------------*/
 		
 		
-		//entrySet()로 모든 키와 값인 Map.Entry를 얻어 Set 객체로 담기
+		//entrySet()메서드로 모든 키와 값인 Map.Entry를 얻어 Set 객체로 담기
 		Set<Entry<Integer, String>> eSet = map.entrySet();
 		
 		System.out.println("방법 3 : entrySet() -> 향상된 for문");
@@ -77,6 +86,30 @@ public class HashMapExample {
 			System.out.println(entry.getKey() + "번의 이름은 " + entry.getValue());
 		}
 		System.out.println();
+		
+		System.out.println("*******************************************************");
+		System.out.println("**** 저장된 전체 객체를 대상으로 삭제하는 방법 ****");
+		System.out.println();
+		
+		System.out.println("3번 객체 삭제 후 값을 리턴 : " + map.remove(3));
+		
+		map.clear(); //객체 전체 삭제
+		System.out.println("총 Entry 객체 수 : " + map.size()); //삭제 확인 방법 1
+		
+		if(map.isEmpty()) System.out.println("모두 삭제되어 비었음"); //삭제 확인 방법 2
+		else System.out.println("비어있지 않음");
+
+		//keySet()메서드로 모든 키 얻어 Set 객체로 담아
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

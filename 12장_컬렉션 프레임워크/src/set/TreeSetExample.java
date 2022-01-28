@@ -33,7 +33,26 @@
    	※ TreeSet 정리 : 자료의 중복을 허용하지 않으면서 출력 결과를 정리하는 클래스
    				   Tree~ 로 시작하는 클래스들은 객체를 추가한 후 결과 출력시 값이 정렬됨 
    				   
+   ------------------------------------------------------------------ 
+     
+   String이나 Integer등 제공받은 클래스는 Comparable 인터페이스를 이미 구현하여
+       재정의된 CompareTo()로 오름차순 정렬되어 추가됨
+   
+       그런데 내림차순으로 바꾸고 싶은 경우에는 어떻게 해야 하는지?
+   String이나 Integer 클래스의 경우 final로 선언되어 있어 
+   compareTo()를 상속받아 내림차순 정렬로 재정의 불가
+       이러한 경우 Comparator 인터페이스를 구현하여 compare()를 내림차순 정렬로 재정의 후 사용하면 해결
+    
+       우리가 만든 사용자 정의 클래스는 Comparable<T> 인터페이스와 Comparator<T> 인터페이스를 함께 구현하여
+   compareTo()로 '오름차순 정렬'되도록 재정의, compare()로 '내림차순 정렬'되도록 재정의하면 된다
+    
+           ※ Comparator 사용 시 유의점 : TreeSet 생성자에 Comparator를 구현한 객체를 매개변수로 전달해야 함
+           
    ------------------------------------------------------------------   
+   
+   'TreeSet으로 관리하는 객체'와 'TreeMap에서 관리하는 Entry의 키 값'은 저장과 동시에 자동 오름차순 정렬
+   (단, String이나 Integer등 제공 받은 클래스는 오름차순 정렬되어 있음)
+   
    
  */
 
@@ -62,6 +81,12 @@ public class TreeSetExample {
 		System.out.println("저장된 총 객체 수 : " + treeSet.size()); // 6
 		System.out.println();
 		
+		System.out.println("** treeSet 객체의 주소만  **"); 
+		System.out.println("오름차순: " + treeSet); //treeSet.toString() 호출 -> 저장된 각 개체의 toString() 호출
+		System.out.println("내림차순: " + treeSet.descendingSet()); //NavigableSet<Integer>
+		//출력값 [78, 80, 83, 87, 95, 98] 오름차순 정렬된 결과
+		
+		System.out.println();
 		
 		
 		/************************************************************************************/
@@ -88,12 +113,24 @@ public class TreeSetExample {
 		
 		/*
 		 * SortedSet<E> subSet(E fromElement, E toElement)
-		 * 						시작~끝 이전까지의 부분 집합 반환
+		 * 						시작(포함)~끝 이전까지의 부분 집합 반환
 		 * 
 		 * NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive)
 		 * 							     시작			        시작 포함 여부			 끝		  		끝 포함 여부
 		 * 							시작(포함 여부 선택) ~ 끝(포함 여부 선택) 까지의 부분 집합 반환
 		 * 							포함 o: true / 포함 x: false
+		 * 
+		 * 
+		 * 
+		 * ※ 주의해야 할 점은, 
+		 * subSet 메소드의 내부에서 원본 set의 데이터들을 복사해서 새로 부분 집합을 구성하는 것이 아니라,
+		 * 원본 데이터들을 그대로 두고, 원본 set과 subSet이 같이 바라보고 있는 상태에서
+		 * subSet은 해당 범위만 바라볼 수 있는 형태로 되어 있다는 것이다.
+		 * 
+		 * 이에 따라, subSet 메소드 후에 원본 set이나 subSet에 변경이 일어나면 (추가,삭제 등)
+		 * 원본 set, subSet 모두 변경이 동시에 일어남.
+		 * (단, subSet은 해당 범위만 보여짐)
+		 * 
 		 */
 		
 		
@@ -171,17 +208,148 @@ public class TreeSetExample {
 		}
 		System.out.println("\n");
 		
+
+		/************************************************************************************/
 		
 		
+		//pollFirst : 제일 낮은 객체부터 꺼내오고 treeSet 컬렉션에서 제거
+		System.out.println("제일 낮은 객체부터 꺼내오며 제거한 순서 : ");
+		while(!treeSet.isEmpty()) { //비어있지 않는 동안 반복
+			System.out.print(treeSet.pollFirst() + " "); //제일 낮은 객체부터 꺼내오고 treeSet 컬렉션에서 제거
+		}
+		System.out.println();
+		if(treeSet.isEmpty()) System.out.println("모두 삭제되어 비어있음");
+		else System.out.println("비어있지 않음");
+		
+	
+		
+		//pollLast : 제일 높은 객체부터 꺼내오고 treeSet 컬렉션에서 제거
+		System.out.println("제일 높은 객체부터 꺼내오며 제거한 순서 : ");
+		while(!treeSet.isEmpty()) { 
+			System.out.print(treeSet.pollLast() + " "); 
+		}
+		System.out.println();
+		if(treeSet.isEmpty()) System.out.println("모두 삭제되어 비어있음");
+		else System.out.println("비어있지 않음");
+		
+		System.out.println();
+
+		
+		/************************************************************************************/
+	
+		
+		System.out.println("------------- [범위 검색] -------------------------------");
+		
+		TreeSet<String> treeSet2 = new TreeSet<String>();
+		treeSet2.add("banana");		
+		treeSet2.add("cherry");
+		treeSet2.add("apple");
+		treeSet2.add("black");		
+		treeSet2.add("school");
+		treeSet2.add("door");		
+		treeSet2.add("element");
+		
+		System.out.println(treeSet2); // 오름차순 정렬되어 있음
+		System.out.println();
 		
 		
+		System.out.print("b ~ e 사이의 단어 검색 : ");
+		NavigableSet<String> set = treeSet2.subSet("b", true, "e", true);
+		System.out.println(set); // [banana, black, cherry, door]
+
+		
+		System.out.println();
 		
 		
+		System.out.println("[banana]");
+		
+		//headSet 기본값 : false
+		System.out.print("지정된 객체보다 작은 값의 객체 리턴 [방법 1] : ");
+		SortedSet<String> set2 = treeSet2.headSet("banana"); 
+		System.out.println(set2); // [apple]
+
+		System.out.print("지정된 객체보다 작은 값의 객체 리턴 [방법 2] : ");
+		SortedSet<String> set2_2 = treeSet2.headSet("banana", false); 
+		System.out.println(set2_2); // [apple]
+
+		System.out.print("지정된 객체를 포함하여 보다 작은 값의 객체 리턴 : ");
+		SortedSet<String> set2_3 = treeSet2.headSet("banana", true); 
+		System.out.println(set2_3); // [apple, banana]
+
+		
+		System.out.println();
+		
+		System.out.println("[bz]");
+		
+		//나열 순서가 사전과 같다고 생각하면 됨
+		System.out.print("지정된 객체보다 작은 값의 객체 리턴 [방법 1] : ");
+		SortedSet<String> set2_4 = treeSet2.headSet("bz"); // bz, ba ..등 확인해보기
+		System.out.println(set2_4); // [apple, banana, black]
+		
+		System.out.print("지정된 객체보다 작은 값의 객체 리턴 [방법 2] : ");
+		SortedSet<String> set2_5 = treeSet2.headSet("bz", false); 
+		System.out.println(set2_5); // [apple, banana, black]
+		
+		System.out.print("지정된 객체를 포함하여 보다 작은 값의 객체 리턴 : ");
+		SortedSet<String> set2_6 = treeSet2.headSet("bz", true); 
+		System.out.println(set2_6); // [apple, banana, black]
+
+		
+		System.out.println();
+		System.out.println("----------------------------------------------------------");
 		
 		
+		System.out.println("[banana]");
+		
+		//tailSet 기본값 : true
+		System.out.print("지정된 객체를 포함하여 큰 값의 객체 리턴 [방법 1] : ");
+		SortedSet<String> set3 = treeSet2.tailSet("banana"); 
+		System.out.println(set3); // [banana, black, cherry, door, element, school]
+
+		System.out.print("지정된 객체를 포함하여 큰 값의 객체 리턴 [방법 2] : ");
+		SortedSet<String> set3_2 = treeSet2.tailSet("banana", true); 
+		System.out.println(set3_2); // [banana, black, cherry, door, element, school]
+
+		System.out.print("지정된 객체보다 큰 값의 객체 리턴 : ");
+		SortedSet<String> set3_3 = treeSet2.tailSet("banana", false); 
+		System.out.println(set3_3); // [black, cherry, door, element, school]
 		
 		
+		System.out.println();
+	
+	
+		System.out.println("[bz]");
+		
+		System.out.print("지정된 객체를 포함하여 큰 값의 객체 리턴 [방법 1] : ");
+		SortedSet<String> set3_4 = treeSet2.tailSet("bz"); 
+		System.out.println(set3_4); // [cherry, door, element, school]
+
+		System.out.print("지정된 객체를 포함하여 큰 값의 객체 리턴 [방법 2] : ");
+		SortedSet<String> set3_5 = treeSet2.tailSet("bz", true); 
+		System.out.println(set3_5); // [cherry, door, element, school]
+
+		System.out.print("지정된 객체보다 큰 값의 객체 리턴 : ");
+		SortedSet<String> set3_6 = treeSet2.tailSet("bz", false); 
+		System.out.println(set3_6); // [cherry, door, element, school]
+	
+	
+		System.out.println();
+		
+		treeSet2.removeAll(treeSet2);
+		System.out.println("총 객체 수 : " + treeSet2.size());
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
 }
+
 
