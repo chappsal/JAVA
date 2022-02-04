@@ -8,7 +8,7 @@
  * 각각 생성자 배열, 필드 배열, 메서드 배열로 리턴
  * 1. getDeclaredConstructors(), getDeclaredFields(), getDeclaredMethods() : 클래스에 선언된 멤버만 가져옴
  * 2. getConstructos(), getFields(), getMethods() : 클래스에 선언된 멤버 + 상속된 멤버까지 얻어옴 (★★생성자 상속 불가 -> 부모의 생성자 얻기 불가)
- * 								단, public 멤버만 얻어옴
+ * 													단, public 멤버만 얻어옴
  */
 
 

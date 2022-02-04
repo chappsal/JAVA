@@ -10,11 +10,11 @@
    		 	|--------------------------|						키와 값의 쌍(=엔트리)으로 저장
    		List 인터페이스				  Set 인터페이스					  키: 중복 x , 값: 중복 o 
    	  	 	|						   |								 |	 
-      배열과 유사하여 index로 관리			  index로 관리 x						클래스
-    -> 순서를 유지하면서 저장			-> 순서없이 저장							 |
-   	         중복 저장 가능				   중복 저장 불가(집합)					  HashMap
- 			|						   |							  TreeMap
- 		     클래스						   클래스
+      배열과 유사하여 index로 관리			  index로 관리 x						        클래스
+    -> 순서를 유지하면서 저장			-> 순서없이 저장								 
+   	         중복 저장 가능				   중복 저장 불가(집합)						  HashMap	: 싱글스레드
+ 			|						   |							  HashTable : 멀티스레드
+ 		     클래스						   클래스							  TreeMap
   		ArrayList					HashSet
   		Vector						TreeSet
  		LinkedList
