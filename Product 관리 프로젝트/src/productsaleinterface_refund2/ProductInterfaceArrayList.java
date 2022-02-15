@@ -1,4 +1,4 @@
-package productsaleinterface_refund;
+package productsaleinterface_refund2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -264,100 +264,68 @@ class Buyer {
 	
 	
 	//구매한 정보 요약
-	void summery() {
-		/* [구매한 제품 목록과 총 금액 출력]
+	void summery(){		
+		/* [구매한 제품목록과 총금액 출력]
 		 * 구입하신 제품은 TV, Computer이고
 		 * 구입하신 제품의 총 금액은 500만원입니다.
 		 * 
 		 * TV 2대, Computer 1대이므로 총 3대입니다.
 		 */
 		
-		int sum = 0; //구매한 제품 가격 합계
-		int i, totalCnt = 0;; //구매한 제품 수
+		int sum = 0;//구매한 제품 가격 합계
+		String itemlist = "";//구매한 제품목록들 (예)""+"TV"+", "+"Computer"
 		
-		String itemlist="";
-		int tvcnt=0, comcnt=0, aucnt=0;
 		
-		//반복문을 이용해 구입한 제품의 '총 가격' , '목록' 만들기
+		int cntTV=0, cntComputer=0, cntAudio=0;//각 제품을 몇 대 구입했는지 카운팅 변수
 		
-		/* 배열 사용
-		for(i=0; i<item.length(); i++) { // i :배열의 index 역할 = 구매자가 구매한 제품 수
-			
-			if(item.get(i) == null) break;
-			
-			sum += item[i].price;
-			
-			//출력 방법-1 삼항연산자
-			itemlist += (i==0) ? item[1] :  ", " + item[1];
-			
-			
-			switch(item[i].toString().toUpperCase()) { //대문자로 통일
-			case "TV" : tvcnt++; totalCnt++; break;
-			case "COMPUTER" : comcnt++; totalCnt++; break;
-			case "AUDIO" : aucnt++; totalCnt++; break;
-			
+		int totalCnt=0;
+		//반복문을 이용해서 구입한 제품의 '총 가격'과 '목록'을 만들어
+		for(Product p : item) {
+			if(p == null) break; //구입한게 없으면 나감
+			if(p instanceof TV) {
+				cntTV++; totalCnt++;
+			} else if(p instanceof Computer) {
+				cntComputer++; totalCnt++;		
+			} else if(p instanceof Audio) {
+				cntAudio++; totalCnt++;
 			}
-		}
-		*/
-		
-		//ArrayList 사용
-		for(i=0; i<item.size(); i++) { // i :배열의 index 역할 = 구매자가 구매한 제품 수
-			
-			//방법1
-			sum += item.get(i).price;
-			
-			//방법2 : 변수 이용
-			Product p = item.get(i);
 			sum += p.price;
-			
-			//방법 1 (삼항연산자)
-			//itemlist += (i==0) ? item.get(i) :  ", " + item.get(i);
+		}
 		
-			//방법 2
-			itemlist += ((i==0) ? "" + p :  ", " + p);
-
-			//방법 1
-			//switch(item.get(i).toString().toUpperCase()) { //대문자로 통일
-			
-			//방법 2
-			switch(p.toString().toUpperCase()) {
-			case "TV" : tvcnt++; totalCnt++; break;
-			case "COMPUTER" : comcnt++; totalCnt++; break;
-			case "AUDIO" : aucnt++; totalCnt++; break;
-			
-			}
+		if(totalCnt == 0) {
+			System.out.println("구매자는 제품을 구매하지 않았습니다.");
+			return;
 		}
 		
 		//출력
-		if(sum!=0) {
-			System.out.println("\n--------------- 구입한 제품 목록과 총 금액 -----------------");
-			
-			//출력 방법 1
-			System.out.println("구매하신 제품은 " + itemlist + "이고");
-			
-			//출력 방법 2 : ArrayList의 toString()메서드는 각 객체의 toString()을 리턴받아 "[TV,Computer]" 를 생성
-			//System.out.println("구매하신 제품은 " + item.toString() + "이고");
-			
-			
-			System.out.println("구입하신 제품의 총 금액은 " + sum + "만원입니다.");
-			
-			String itemcnt = "";
-			if(tvcnt > 0) itemcnt += "TV : " + tvcnt + "대, "; 
-			if(comcnt > 0) itemcnt += "Computer : " + comcnt + "대, ";
-			if(aucnt > 0) itemcnt += "Audio : " + aucnt + "대, ";
-			
-			itemcnt = itemcnt.substring(0, itemcnt.length()-2);
-			
-			//System.out.println(itemcnt + "이므로 총" + totalCnt + "대 입니다."); //방법 1
-			System.out.println(itemcnt + "이므로 총 " + i + "대 입니다."); //방법 2
-			
-		} else {
-			System.out.println("제품을 구매하지 않았습니다.");
+		String productList = "";
+		String productCntList = "";
+		if(cntTV > 0) {
+			productList += "TV, ";
+			//productCntList += "TV " + Integer.toString(cntTV) + "대, ";
+			productCntList += "TV " + cntTV + "대, ";
 		}
+		if(cntComputer > 0) {
+			productList += "Computer, ";
+			//productCntList += "Computer " + Integer.toString(cntComputer) + "대, ";
+			productCntList += "Computer " + cntComputer + "대, ";
+		}
+		if(cntAudio > 0) {
+			productList += "Audio, ";
+			//productCntList += "Audio " +  Integer.toString(cntAudio) + "대, ";
+			productCntList += "Audio " + cntAudio + "대, ";
+		}
+		productList = productList.substring(0, productList.length()-2);
+		productCntList = productCntList.substring(0, productCntList.length()-2);
+				
+		System.out.println("구입하신 제품은 [" + productList + "]이고");
+		System.out.println("구입하신 제품의 총 금액은 " + sum +"만원입니다.\n");
+		System.out.println(productCntList + " 이므로 총 " + (cntTV + cntComputer + cntAudio) + "대 입니다.");
+		System.out.println(productCntList + " 이므로 총 " + totalCnt + "대 입니다.");
 		
-	}
-}
-
+	}	
+}	
+		
 
 /*
  * 1개의 파일에 여러 클래스가 있다면 public 붙일 수 있는 클래스는 단 하나
